@@ -1,0 +1,219 @@
+-------- App.js --------
+e5d00528 (nidif       2023-11-04 17:36:25 -0400   1) import {
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500  11)     Image,
+c1497d16 (nidif       2023-11-16 04:14:04 -0500  12)     Switch,
+c1497d16 (nidif       2023-11-16 04:14:04 -0500  13)     ScrollView,
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  14) } from 'react-native';
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  15) import * as React from 'react';
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  16) import { useEffect, useState } from 'react';
+f1c90548 (nidif       2023-11-04 19:06:56 -0400  17) import { NavigationContainer } from '@react-navigation/native';
+f1c90548 (nidif       2023-11-04 19:06:56 -0400  18) import { createNativeStackNavigator } from '@react-navigation/native-stack';
+f1c90548 (nidif       2023-11-04 19:06:56 -0400  19) import { Audio } from 'expo-av';
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500  20) import * as FileSystem from 'expo-file-system';
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  21)
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  26) const Stack = createNativeStackNavigator();
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  27) const Separator = () => <View style={styles.separator} />;
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  28)
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  39) const MusicPlayerApp = () => {
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  40)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500  67)                 <Stack.Screen
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500  68)                   name="Settings Page"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500  69)                   component={SettingsScreen}
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  75) };
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  76)
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  77) //title page, library page is set for inital landing page
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  92) };
+e5d00528 (nidif       2023-11-04 17:36:25 -0400  93)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 461)      <View style={styles.setbtn}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 462)      <Button
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 463)          title="Settings"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 464)          color="#aaaaaa"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 465)          onPress={() => navigation.navigate('Settings Page')}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 466)        />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 467)      </View>
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 470) };
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 471)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 566)      <View style={styles.setbtn}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 567)      <Button
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 568)          title="Settings"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 569)          color="#aaaaaa"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 570)          onPress={() => navigation.navigate('Settings Page')}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 571)        />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 572)      </View>
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 576)
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 577) //where explore screen code goes
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 578) const ExploreScreen = ({navigation}) => {
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 579)
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 580)   const songjson = require('./songs.json');
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 581)   var songlist = [];
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 582)   //to display all song info
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 583)   for (let i = 0; i < 100; i++) {
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 584)     songlist.push(
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 585)       <View key={i}>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 586)       <Text>#{(songjson[i].position)}</Text>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 587)       <Text>{(songjson[i].name)} - {(songjson[i].artist)}</Text>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 588)       <Text> </Text>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 589)       </View>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 590)     );
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 591)   }
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 592)
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 593)   return(
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 594)     <View style={styles.screensize}>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 595)     <ScrollView>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 596)     <Text style={{fontWeight: 'bold', fontSize: 20, margin:20, textAlign: 'center'}}>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 597)     Billboard Hot 100
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 598)     </Text>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 599)     <Text style={{textAlign: 'center'}}>Explore some of today's hottest tracks.</Text>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 600)     <Separator />
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 601)     <View style={{fontSize: 16, margin: 20, textAlign: 'center'}}>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 602)     {songlist}
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 603)     </View>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 604)     </ScrollView>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 605)     <Separator />
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 606)      <View style={styles.libbtn}>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 607)        <Button
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 608)          title="Library"
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 609)          color="#aaaaaa"
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 610)          onPress={() => navigation.navigate('Library Page')}
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 611)        />
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 612)      </View>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 613)      <View style={styles.editbtn}>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 614)         <Button
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 615)           title="Editor"
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 616)           color="#aaaaaa"
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 617)           onPress={() => navigation.navigate('Editor Page')}
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 618)         />
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 619)       </View>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 620)       <View style={styles.explorebtn}>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 621)         <Button
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 622)           title="Explore"
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 623)           color="#aaaaaa"
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 624)           onPress={() => navigation.navigate('Explore Page')}
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 625)         />
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 626)       </View>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 627)       <View style={styles.setbtn}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 628)      <Button
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 629)          title="Settings"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 630)          color="#aaaaaa"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 631)          onPress={() => navigation.navigate('Settings Page')}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 632)        />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 633)      </View>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 634)    </View>
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 635)   );
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 636) }
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 637)
+c1497d16 (nidif       2023-11-16 04:14:04 -0500 638) //where settings page code goes... wip
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 639) const SettingsScreen = ({navigation}) => {
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 640)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 641)   const [username, onChangeText] = useState('user');
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 642)   const [setting1, setIsEnabled1] = useState(false);
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 643)   const [setting2, setIsEnabled2] = useState(false);
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 644)   const [setting3, setIsEnabled3] = useState(false);
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 645)   const toggleSwitch1 = () => setIsEnabled1(previousState => !previousState);
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 646)   const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 647)   const toggleSwitch3 = () => setIsEnabled3(previousState => !previousState);
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 648)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 649)   //testing file stuff
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 650)   /*
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 651)   const filename = FileSystem.documentDirectory + "text.txt";
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 652)   FileSystem.writeAsStringAsync(filename, "Hello World")
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 653)   .then(() => {
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 654)     console.log('file content:', FileSystem.readAsStringAsync(filename))
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 655)   });
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 656)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 657)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 658) FileSystem.downloadAsync(
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 659)   'http://techslides.com/demos/sample-videos/small.mp4',
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 660)   FileSystem.documentDirectory + 'small.mp4'
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 661) )
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 662)   .then(({ uri }) => {
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 663)     console.log('Finished downloading to ', uri);
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 664)   });
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 665)   */
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 666)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 667)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 668)   return(
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 669)     <View style={styles.screensize}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 670)     <Separator />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 671)     <Text style={styles.paragraph}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 672)       Username is {username}.
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 673)     </Text>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 674)      <TextInput
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 675)        style={styles.input}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 676)        onChangeText={onChangeText}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 677)        value={username}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 678)      />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 679)     <Separator />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 680)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 681)     <View  style={styles.paragraph}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 682)     <Text>Setting 1:</Text>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 683)     <Switch
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 684)         trackColor={{false: '#767577', true: '#a6a6a6'}}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 685)         thumbColor={setting1 ? '#dbdbdb' : '#767577'}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 686)         onValueChange={toggleSwitch1}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 687)         value={setting1}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 688)       />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 689)     </View>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 690)     <Separator />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 691)     <View style={styles.paragraph}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 692)     <Text>Setting 2:</Text>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 693)     <Switch
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 694)         trackColor={{false: '#767577', true: '#a6a6a6'}}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 695)         thumbColor={setting2 ? '#dbdbdb' : '#767577'}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 696)         onValueChange={toggleSwitch2}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 697)         value={setting2}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 698)       />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 699)     </View>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 700)     <Separator />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 701)     <View style={styles.paragraph}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 702)     <Text>Setting 3:</Text>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 703)     <Switch
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 704)         trackColor={{false: '#767577', true: '#a6a6a6'}}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 705)         thumbColor={setting3 ? '#dbdbdb' : '#767577'}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 706)         onValueChange={toggleSwitch3}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 707)         value={setting3}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 708)       />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 709)     </View>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 710)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 711)     <Separator />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 712)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 713)      <View style={styles.libbtn}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 714)        <Button
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 715)          title="Library"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 716)          color="#aaaaaa"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 717)          onPress={() => navigation.navigate('Library Page')}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 718)        />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 719)      </View>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 720)      <View style={styles.editbtn}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 721)         <Button
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 722)           title="Editor"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 723)           color="#aaaaaa"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 724)           onPress={() => navigation.navigate('Editor Page')}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 725)         />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 726)       </View>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 727)       <View style={styles.explorebtn}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 728)         <Button
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 729)           title="Explore"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 730)           color="#aaaaaa"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 731)           onPress={() => navigation.navigate('Explore Page')}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 732)         />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 733)       </View>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 734)      <View style={styles.setbtn}>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 735)      <Button
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 736)          title="Settings"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 737)          color="#aaaaaa"
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 738)          onPress={() => navigation.navigate('Settings Page')}
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 739)        />
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 740)      </View>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 741)    </View>
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 742)
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 743)   );
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 744) }
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 745)
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 746) //styles go here...
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 747) const styles = StyleSheet.create({
+5be5c2c8 (nidif       2023-11-16 01:20:55 -0500 798)     setbtn: {
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 830) });
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 831)
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 832) export default MusicPlayerApp;
+e5d00528 (nidif       2023-11-04 17:36:25 -0400 833) AppRegistry.registerComponent('MusicPlayerApp', () => MusicPlayerApp);

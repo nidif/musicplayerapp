@@ -1,0 +1,729 @@
+f025d502 (williamques 2023-11-13 12:11:02 -0500   2)     AppRegistry,
+f025d502 (williamques 2023-11-13 12:11:02 -0500   3)     Text,
+f025d502 (williamques 2023-11-13 12:11:02 -0500   4)     View,
+f025d502 (williamques 2023-11-13 12:11:02 -0500   5)     Button,
+f025d502 (williamques 2023-11-13 12:11:02 -0500   6)     StyleSheet,
+f025d502 (williamques 2023-11-13 12:11:02 -0500   7)     TextInput,
+f025d502 (williamques 2023-11-13 12:11:02 -0500   8)     TouchableOpacity,
+f025d502 (williamques 2023-11-13 12:11:02 -0500   9)     Trimmer,
+f025d502 (williamques 2023-11-13 12:11:02 -0500  10)     ImageBackground,
+f025d502 (williamques 2023-11-13 12:11:02 -0500  11)     Image
+88816936 (williamques 2023-11-13 12:56:57 -0500  19) // Library imports
+88816936 (williamques 2023-11-13 12:56:57 -0500  20) import './Library.css';
+88816936 (williamques 2023-11-13 12:56:57 -0500  21) import { clear } from '@testing-library/user-event/dist/clear';
+88816936 (williamques 2023-11-13 12:56:57 -0500  22) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500  26) // Editor Constants
+f025d502 (williamques 2023-11-13 12:11:02 -0500  27) const maxTrimDuration = 60000;
+f025d502 (williamques 2023-11-13 12:11:02 -0500  28) const minimumTrimDuration = 1000;
+f025d502 (williamques 2023-11-13 12:11:02 -0500  29) const totalDuration = 180000;
+f025d502 (williamques 2023-11-13 12:11:02 -0500  30) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500  31) const initialLeftHandlePosition = 0;
+f025d502 (williamques 2023-11-13 12:11:02 -0500  32) const initialRightHandlePosition = 36000;
+f025d502 (williamques 2023-11-13 12:11:02 -0500  33) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500  34) const scrubInterval = 10;
+f025d502 (williamques 2023-11-13 12:11:02 -0500  35) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500  38)     return (
+f025d502 (williamques 2023-11-13 12:11:02 -0500  39)         //defining some screens with the navigator
+f025d502 (williamques 2023-11-13 12:11:02 -0500  40)         <NavigationContainer>
+f025d502 (williamques 2023-11-13 12:11:02 -0500  41)             <Stack.Navigator>
+f025d502 (williamques 2023-11-13 12:11:02 -0500  42) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500  43)                 <Stack.Screen
+f025d502 (williamques 2023-11-13 12:11:02 -0500  44)                     name="Title"
+f025d502 (williamques 2023-11-13 12:11:02 -0500  45)                     component={TitleScreen}
+f025d502 (williamques 2023-11-13 12:11:02 -0500  46)                     options={{ title: 'Title', headerShown: false }}
+f025d502 (williamques 2023-11-13 12:11:02 -0500  47)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500  48) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500  49)                 <Stack.Screen
+f025d502 (williamques 2023-11-13 12:11:02 -0500  50)                     name="Library Page"
+f025d502 (williamques 2023-11-13 12:11:02 -0500  51)                     component={LibraryScreen}
+f025d502 (williamques 2023-11-13 12:11:02 -0500  52)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500  53) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500  54)                 <Stack.Screen
+f025d502 (williamques 2023-11-13 12:11:02 -0500  55)                     name="Editor Page"
+f025d502 (williamques 2023-11-13 12:11:02 -0500  56)                     component={EditorScreen}
+f025d502 (williamques 2023-11-13 12:11:02 -0500  57)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500  58) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500  59)                 <Stack.Screen
+f025d502 (williamques 2023-11-13 12:11:02 -0500  60)                     name="Explore Page"
+f025d502 (williamques 2023-11-13 12:11:02 -0500  61)                     component={ExploreScreen}
+f025d502 (williamques 2023-11-13 12:11:02 -0500  62)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500  63) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500  64)                 <Stack.Screen
+f025d502 (williamques 2023-11-13 12:11:02 -0500  65)                     name="Account Page"
+f025d502 (williamques 2023-11-13 12:11:02 -0500  66)                     component={AccountScreen}
+f025d502 (williamques 2023-11-13 12:11:02 -0500  67)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500  68) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500  69)             </Stack.Navigator>
+f025d502 (williamques 2023-11-13 12:11:02 -0500  70)         </NavigationContainer>
+f025d502 (williamques 2023-11-13 12:11:02 -0500  71)     );
+f025d502 (williamques 2023-11-13 12:11:02 -0500  75) const TitleScreen = ({ navigation }) => {
+f025d502 (williamques 2023-11-13 12:11:02 -0500  76)     return (
+f025d502 (williamques 2023-11-13 12:11:02 -0500  77)         <View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500  78)             <Text style={styles.logo}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500  79)                 Downloaded Music Player
+f025d502 (williamques 2023-11-13 12:11:02 -0500  80)             </Text>
+f025d502 (williamques 2023-11-13 12:11:02 -0500  81)             <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500  82)                 title="Start Listening"
+f025d502 (williamques 2023-11-13 12:11:02 -0500  83)                 color="#000000"
+f025d502 (williamques 2023-11-13 12:11:02 -0500  84)                 onPress={() =>
+f025d502 (williamques 2023-11-13 12:11:02 -0500  85)                     navigation.navigate('Library Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500  86)             />
+f025d502 (williamques 2023-11-13 12:11:02 -0500  87)         </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500  88)     );
+88816936 (williamques 2023-11-13 12:56:57 -0500  91) // library/player page goes here
+f025d502 (williamques 2023-11-13 12:11:02 -0500  92) const LibraryScreen = ({ navigation }) => {
+88816936 (williamques 2023-11-13 12:56:57 -0500  93)     // FUNCTIONS:
+88816936 (williamques 2023-11-13 12:56:57 -0500  94) 
+88816936 (williamques 2023-11-13 12:56:57 -0500  95)     let filter_open = false;
+88816936 (williamques 2023-11-13 12:56:57 -0500  96)     let persistent_list = {};
+88816936 (williamques 2023-11-13 12:56:57 -0500  97)     let current_sort = "Title";
+88816936 (williamques 2023-11-13 12:56:57 -0500  98)     let track_list = {};
+88816936 (williamques 2023-11-13 12:56:57 -0500  99)     /*
+88816936 (williamques 2023-11-13 12:56:57 -0500 100)     Tracklist:
+88816936 (williamques 2023-11-13 12:56:57 -0500 101)       1: {
+88816936 (williamques 2023-11-13 12:56:57 -0500 102)         Title: "SongName"
+88816936 (williamques 2023-11-13 12:56:57 -0500 103)         Artist: "ArtistName"
+88816936 (williamques 2023-11-13 12:56:57 -0500 104)         Album: "AlbumName"
+88816936 (williamques 2023-11-13 12:56:57 -0500 105)         Path: "filename.mp3"
+88816936 (williamques 2023-11-13 12:56:57 -0500 106)         // possibly need to add more fields here
+88816936 (williamques 2023-11-13 12:56:57 -0500 107)       }
+88816936 (williamques 2023-11-13 12:56:57 -0500 108)     */
+88816936 (williamques 2023-11-13 12:56:57 -0500 109) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 110)     // *** Playback Functions: ***
+f025d502 (williamques 2023-11-13 12:11:02 -0500 111)     const [sound, setSound] = React.useState();
+f025d502 (williamques 2023-11-13 12:11:02 -0500 112) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 113)     //load track .. can stop by reloading track also
+88816936 (williamques 2023-11-13 12:56:57 -0500 114)     async function loadSound(songPath) {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 115)         console.log('Loading Sound');
+88816936 (williamques 2023-11-13 12:56:57 -0500 116)         const { sound } = await Audio.Sound.createAsync(require(songPath));
+f025d502 (williamques 2023-11-13 12:11:02 -0500 117)         setSound(sound);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 118)     }
+f025d502 (williamques 2023-11-13 12:11:02 -0500 119) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 120)     //play
+88816936 (williamques 2023-11-13 12:56:57 -0500 121)     async function play(track_index) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 122)         console.log('Loading Sound');
+88816936 (williamques 2023-11-13 12:56:57 -0500 123)         let file = track_list[track_index].Path;
+88816936 (williamques 2023-11-13 12:56:57 -0500 124)         loadSound(file);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 125)         console.log('Playing Sound');
+f025d502 (williamques 2023-11-13 12:11:02 -0500 126)         await sound.playAsync();
+f025d502 (williamques 2023-11-13 12:11:02 -0500 127)     }
+f025d502 (williamques 2023-11-13 12:11:02 -0500 128) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 129)     //pause
+f025d502 (williamques 2023-11-13 12:11:02 -0500 130)     async function pauseSound() {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 131)         console.log('Pausing Sound');
+f025d502 (williamques 2023-11-13 12:11:02 -0500 132)         await sound.pauseAsync();
+f025d502 (williamques 2023-11-13 12:11:02 -0500 133)     }
+f025d502 (williamques 2023-11-13 12:11:02 -0500 134) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 135)     React.useEffect(() => {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 136)         return sound
+f025d502 (williamques 2023-11-13 12:11:02 -0500 137)             ? () => {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 138)                 console.log('Unloading Sound');
+f025d502 (williamques 2023-11-13 12:11:02 -0500 139)                 sound.unloadAsync();
+f025d502 (williamques 2023-11-13 12:11:02 -0500 140)             }
+f025d502 (williamques 2023-11-13 12:11:02 -0500 141)             : undefined;
+f025d502 (williamques 2023-11-13 12:11:02 -0500 142)     }, [sound]);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 143) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 144)     // *** Library Functions: ***
+88816936 (williamques 2023-11-13 12:56:57 -0500 145) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 146)     function find(list, value) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 147)         for (let i = 0; i < list.length; i++) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 148)             if (list[i] == value) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 149)                 return i;
+88816936 (williamques 2023-11-13 12:56:57 -0500 150)             }
+88816936 (williamques 2023-11-13 12:56:57 -0500 151)         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 152)         return -1;
+88816936 (williamques 2023-11-13 12:56:57 -0500 153)     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 154) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 155)     function get_names(category) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 156)         let list = [];
+88816936 (williamques 2023-11-13 12:56:57 -0500 157)         for (let i = 0; i < Object.keys(persistent_list).length; i++) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 158)             let name = persistent_list[i][category];
+88816936 (williamques 2023-11-13 12:56:57 -0500 159)             if (find(list, name) == -1) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 160)                 list.push(name);
+88816936 (williamques 2023-11-13 12:56:57 -0500 161)             }
+88816936 (williamques 2023-11-13 12:56:57 -0500 162)         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 163)         return list;
+88816936 (williamques 2023-11-13 12:56:57 -0500 164)     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 165) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 166)     // still arbitrary data, will read metadata once it's added
+88816936 (williamques 2023-11-13 12:56:57 -0500 167)     function load_info() {
+88816936 (williamques 2023-11-13 12:56:57 -0500 168)         for (let i = 0; i < 20; i++) { // copy pasted code from here
+88816936 (williamques 2023-11-13 12:56:57 -0500 169)             let new_info = {};
+88816936 (williamques 2023-11-13 12:56:57 -0500 170)             new_info["Title"] = "Track" + (Math.floor(Math.random() * 90) + 10);
+88816936 (williamques 2023-11-13 12:56:57 -0500 171)             let a = "Helo";
+88816936 (williamques 2023-11-13 12:56:57 -0500 172)             if (i < 10) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 173)                 a = "Jelo";
+88816936 (williamques 2023-11-13 12:56:57 -0500 174)             }
+88816936 (williamques 2023-11-13 12:56:57 -0500 175)             new_info["Artist"] = a;
+88816936 (williamques 2023-11-13 12:56:57 -0500 176)             new_info["Album"] = "AlbumName";
+88816936 (williamques 2023-11-13 12:56:57 -0500 177)             new_info["Path"] = "placeholder.mp3";
+88816936 (williamques 2023-11-13 12:56:57 -0500 178)             persistent_list[i] = new_info;
+88816936 (williamques 2023-11-13 12:56:57 -0500 179)             //track_list[i] = new_info;
+88816936 (williamques 2023-11-13 12:56:57 -0500 180)         } // until here
+88816936 (williamques 2023-11-13 12:56:57 -0500 181)         track_list = persistent_list;
+88816936 (williamques 2023-11-13 12:56:57 -0500 182)     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 183) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 184)     function get_songs(dst_list, src_list, by, name) { // copy pasted code from here
+88816936 (williamques 2023-11-13 12:56:57 -0500 185)         let index = 0;
+88816936 (williamques 2023-11-13 12:56:57 -0500 186)         for (let i = 0; i < Object.keys(src_list).length; i++) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 187)             if (src_list[i][by] == name) { // if a track's title/album/artist name matches the given name
+88816936 (williamques 2023-11-13 12:56:57 -0500 188)                 dst_list[index] = src_list[i];
+88816936 (williamques 2023-11-13 12:56:57 -0500 189)                 index += 1;
+88816936 (williamques 2023-11-13 12:56:57 -0500 190)             }
+88816936 (williamques 2023-11-13 12:56:57 -0500 191)         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 192)     } // until here
+88816936 (williamques 2023-11-13 12:56:57 -0500 193) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 194)     function sort(list, by) { // copy pasted code from here
+88816936 (williamques 2023-11-13 12:56:57 -0500 195)         // for now uses bubble sort, but could be revised for faster sorting later
+88816936 (williamques 2023-11-13 12:56:57 -0500 196)         let length = Object.keys(list).length;
+88816936 (williamques 2023-11-13 12:56:57 -0500 197)         for (let i = 0; i < length - 1; i++) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 198)             let swap_necessary = false;
+88816936 (williamques 2023-11-13 12:56:57 -0500 199)             for (let j = 0; j < length - 1 - i; j++) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 200)                 if (list[j][by] > list[j + 1][by]) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 201)                     swap_necessary = true;
+88816936 (williamques 2023-11-13 12:56:57 -0500 202)                     let entry = list[j];
+88816936 (williamques 2023-11-13 12:56:57 -0500 203)                     list[j] = list[j + 1];
+88816936 (williamques 2023-11-13 12:56:57 -0500 204)                     list[j + 1] = entry;
+88816936 (williamques 2023-11-13 12:56:57 -0500 205)                 }
+88816936 (williamques 2023-11-13 12:56:57 -0500 206)             }
+88816936 (williamques 2023-11-13 12:56:57 -0500 207) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 208)             if (swap_necessary == false) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 209)                 break;
+88816936 (williamques 2023-11-13 12:56:57 -0500 210)             }
+88816936 (williamques 2023-11-13 12:56:57 -0500 211)         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 212)     } // until here
+88816936 (williamques 2023-11-13 12:56:57 -0500 213) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 214)     function apply_changes(behavior, by, name) { // copy pasted code from here
+88816936 (williamques 2023-11-13 12:56:57 -0500 215)         // 'behavior' determines if it's sort or filter
+88816936 (williamques 2023-11-13 12:56:57 -0500 216)         // 'by' determines what to sort or filter by ("Title", "Artist", "Album")
+88816936 (williamques 2023-11-13 12:56:57 -0500 217)         // 'name' is what artist/playlist/album name to filter by
+88816936 (williamques 2023-11-13 12:56:57 -0500 218)         //load_info();
+88816936 (williamques 2023-11-13 12:56:57 -0500 219)         track_list = persistent_list;
+88816936 (williamques 2023-11-13 12:56:57 -0500 220) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 221)         if (behavior == "sort") {
+88816936 (williamques 2023-11-13 12:56:57 -0500 222)             if (by == "Title") {
+88816936 (williamques 2023-11-13 12:56:57 -0500 223)                 sort(track_list, by);
+88816936 (williamques 2023-11-13 12:56:57 -0500 224)             } else {
+88816936 (williamques 2023-11-13 12:56:57 -0500 225)                 let index = 0;
+88816936 (williamques 2023-11-13 12:56:57 -0500 226)                 let all_artists = {}; // list of all artists/albums in the library
+88816936 (williamques 2023-11-13 12:56:57 -0500 227)                 for (let i = 0; i < Object.keys(track_list).length; i++) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 228)                     let do_not_add = false;
+88816936 (williamques 2023-11-13 12:56:57 -0500 229)                     for (let j = 0; j < Object.keys(all_artists).length; j++) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 230)                         if (all_artists[j][by] == track_list[i][by]) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 231)                             do_not_add = true;
+88816936 (williamques 2023-11-13 12:56:57 -0500 232)                             break;
+88816936 (williamques 2023-11-13 12:56:57 -0500 233)                         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 234)                     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 235)                     if (do_not_add == false) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 236)                         let new_info = {};
+88816936 (williamques 2023-11-13 12:56:57 -0500 237)                         new_info[by] = track_list[i][by];
+88816936 (williamques 2023-11-13 12:56:57 -0500 238)                         all_artists[index] = new_info;
+88816936 (williamques 2023-11-13 12:56:57 -0500 239)                         index += 1;
+88816936 (williamques 2023-11-13 12:56:57 -0500 240)                     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 241)                 }
+88816936 (williamques 2023-11-13 12:56:57 -0500 242) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 243)                 sort(all_artists, by);
+88816936 (williamques 2023-11-13 12:56:57 -0500 244)                 let temp_list = {};
+88816936 (williamques 2023-11-13 12:56:57 -0500 245)                 for (let k = 0; k < Object.keys(all_artists).length; k++) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 246)                     let filtered_songs = {};
+88816936 (williamques 2023-11-13 12:56:57 -0500 247)                     get_songs(filtered_songs, track_list, by, all_artists[k][by]); // partitions by category
+88816936 (williamques 2023-11-13 12:56:57 -0500 248)                     sort(filtered_songs, "Title"); // sorts each category
+88816936 (williamques 2023-11-13 12:56:57 -0500 249) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 250)                     let start = Object.keys(temp_list).length;
+88816936 (williamques 2023-11-13 12:56:57 -0500 251)                     for (let i = 0; i < Object.keys(filtered_songs).length; i++) { // adds to main list
+88816936 (williamques 2023-11-13 12:56:57 -0500 252)                         temp_list[start + i] = filtered_songs[i];
+88816936 (williamques 2023-11-13 12:56:57 -0500 253)                     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 254)                 }
+88816936 (williamques 2023-11-13 12:56:57 -0500 255)                 track_list = temp_list;
+88816936 (williamques 2023-11-13 12:56:57 -0500 256)             }
+88816936 (williamques 2023-11-13 12:56:57 -0500 257)         } else if (behavior == "filter") {
+88816936 (williamques 2023-11-13 12:56:57 -0500 258)             let filtered_list = {};
+88816936 (williamques 2023-11-13 12:56:57 -0500 259)             get_songs(filtered_list, track_list, by, name);
+88816936 (williamques 2023-11-13 12:56:57 -0500 260)             sort(filtered_list, current_sort);
+88816936 (williamques 2023-11-13 12:56:57 -0500 261)             track_list = filtered_list;
+88816936 (williamques 2023-11-13 12:56:57 -0500 262)         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 263)     } // until here
+88816936 (williamques 2023-11-13 12:56:57 -0500 264) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 265)     function display_songs() {
+88816936 (williamques 2023-11-13 12:56:57 -0500 266)         const lib = document.getElementById("library");
+88816936 (williamques 2023-11-13 12:56:57 -0500 267) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 268)         for (let i = 0; i < Object.keys(track_list).length; i++) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 269)             let title = track_list[i].Title;
+88816936 (williamques 2023-11-13 12:56:57 -0500 270)             let artist = track_list[i].Artist;
+88816936 (williamques 2023-11-13 12:56:57 -0500 271) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 272)             const separator_div = document.createElement("div");
+88816936 (williamques 2023-11-13 12:56:57 -0500 273)             const list_div = document.createElement("div");
+88816936 (williamques 2023-11-13 12:56:57 -0500 274)             const button_div = document.createElement("div");
+88816936 (williamques 2023-11-13 12:56:57 -0500 275)             const text_div = document.createElement("div");
+88816936 (williamques 2023-11-13 12:56:57 -0500 276) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 277)             const play_button = document.createElement("button");
+88816936 (williamques 2023-11-13 12:56:57 -0500 278)             const title_text = document.createElement("p");
+88816936 (williamques 2023-11-13 12:56:57 -0500 279)             const title_node = document.createTextNode(title);
+88816936 (williamques 2023-11-13 12:56:57 -0500 280)             const artist_text = document.createElement("p");
+88816936 (williamques 2023-11-13 12:56:57 -0500 281)             const artist_node = document.createTextNode(artist);
+88816936 (williamques 2023-11-13 12:56:57 -0500 282)             list_div.setAttribute("class", "track");
+88816936 (williamques 2023-11-13 12:56:57 -0500 283)             button_div.setAttribute("class", "button_section");
+88816936 (williamques 2023-11-13 12:56:57 -0500 284)             text_div.setAttribute("class", "text_section");
+88816936 (williamques 2023-11-13 12:56:57 -0500 285)             play_button.setAttribute("class", "play_button")
+88816936 (williamques 2023-11-13 12:56:57 -0500 286)             separator_div.setAttribute("style", "height: 5px; width: 100%;")
+88816936 (williamques 2023-11-13 12:56:57 -0500 287)             title_text.setAttribute("class", "title_class");
+88816936 (williamques 2023-11-13 12:56:57 -0500 288)             artist_text.setAttribute("class", "artist_class");
+88816936 (williamques 2023-11-13 12:56:57 -0500 289) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 290)             const image = document.createElement("img");
+88816936 (williamques 2023-11-13 12:56:57 -0500 291)             image.setAttribute("src", "./assets/play.png")
+88816936 (williamques 2023-11-13 12:56:57 -0500 292)             image.setAttribute("class", "play_image");
+88816936 (williamques 2023-11-13 12:56:57 -0500 293)             play_button.appendChild(image);
+88816936 (williamques 2023-11-13 12:56:57 -0500 294)             play_button.addEventListener("click", (event) => {
+88816936 (williamques 2023-11-13 12:56:57 -0500 295)                 play(i);
+88816936 (williamques 2023-11-13 12:56:57 -0500 296)             })
+88816936 (williamques 2023-11-13 12:56:57 -0500 297) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 298)             // adds button section to row
+88816936 (williamques 2023-11-13 12:56:57 -0500 299)             button_div.appendChild(play_button);
+88816936 (williamques 2023-11-13 12:56:57 -0500 300)             list_div.appendChild(button_div);
+88816936 (williamques 2023-11-13 12:56:57 -0500 301) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 302)             // adds text section to row
+88816936 (williamques 2023-11-13 12:56:57 -0500 303)             text_div.appendChild(title_text);
+88816936 (williamques 2023-11-13 12:56:57 -0500 304)             list_div.appendChild(text_div);
+88816936 (williamques 2023-11-13 12:56:57 -0500 305)             text_div.appendChild(artist_text)
+88816936 (williamques 2023-11-13 12:56:57 -0500 306) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 307)             title_text.appendChild(title_node);
+88816936 (williamques 2023-11-13 12:56:57 -0500 308)             artist_text.appendChild(artist_node);
+88816936 (williamques 2023-11-13 12:56:57 -0500 309)             lib.appendChild(list_div);
+88816936 (williamques 2023-11-13 12:56:57 -0500 310)             lib.appendChild(separator_div);
+88816936 (williamques 2023-11-13 12:56:57 -0500 311)         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 312)     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 313) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 314)     function clear_songs() {
+88816936 (williamques 2023-11-13 12:56:57 -0500 315)         const lib = document.getElementById("library");
+88816936 (williamques 2023-11-13 12:56:57 -0500 316) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 317)         while (lib.hasChildNodes()) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 318)             lib.removeChild(lib.firstChild);
+88816936 (williamques 2023-11-13 12:56:57 -0500 319)         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 320)     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 321) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 322)     function sort_clicked() {
+88816936 (williamques 2023-11-13 12:56:57 -0500 323)         if (current_sort == "Title") {
+88816936 (williamques 2023-11-13 12:56:57 -0500 324)             current_sort = "Artist";
+88816936 (williamques 2023-11-13 12:56:57 -0500 325)         } else if (current_sort == "Artist") {
+88816936 (williamques 2023-11-13 12:56:57 -0500 326)             current_sort = "Album";
+88816936 (williamques 2023-11-13 12:56:57 -0500 327)         } else if (current_sort == "Album") {
+88816936 (williamques 2023-11-13 12:56:57 -0500 328)             current_sort = "Title";
+88816936 (williamques 2023-11-13 12:56:57 -0500 329)         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 330) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 331)         const sort_text = document.getElementById("sort_text");
+88816936 (williamques 2023-11-13 12:56:57 -0500 332)         sort_text.textContent = "Sorting by " + current_sort;
+88816936 (williamques 2023-11-13 12:56:57 -0500 333)         apply_changes("sort", current_sort);
+88816936 (williamques 2023-11-13 12:56:57 -0500 334)         clear_songs();
+88816936 (williamques 2023-11-13 12:56:57 -0500 335)         display_songs();
+88816936 (williamques 2023-11-13 12:56:57 -0500 336)     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 337) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 338)     function clear_filter() {
+88816936 (williamques 2023-11-13 12:56:57 -0500 339)         const filter = document.getElementById("filter");
+88816936 (williamques 2023-11-13 12:56:57 -0500 340)         while (filter.hasChildNodes()) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 341)             filter.removeChild(filter.firstChild);
+88816936 (williamques 2023-11-13 12:56:57 -0500 342)         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 343)     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 344) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 345)     function filter_chosen(by, name) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 346)         clear_filter();
+88816936 (williamques 2023-11-13 12:56:57 -0500 347)         filter_open = false;
+88816936 (williamques 2023-11-13 12:56:57 -0500 348)         apply_changes("filter", by, name);
+88816936 (williamques 2023-11-13 12:56:57 -0500 349)         clear_songs();
+88816936 (williamques 2023-11-13 12:56:57 -0500 350)         display_songs();
+88816936 (williamques 2023-11-13 12:56:57 -0500 351)     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 352) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 353)     function fill_filter(by) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 354)         const filter = document.getElementById("filter");
+88816936 (williamques 2023-11-13 12:56:57 -0500 355)         clear_filter();
+88816936 (williamques 2023-11-13 12:56:57 -0500 356)         let list = get_names(by);
+88816936 (williamques 2023-11-13 12:56:57 -0500 357)         for (let i = 0; i < list.length; i++) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 358)             const button = document.createElement("button");
+88816936 (williamques 2023-11-13 12:56:57 -0500 359)             const button_text = document.createElement("p");
+88816936 (williamques 2023-11-13 12:56:57 -0500 360)             const button_node = document.createTextNode(list[i]);
+88816936 (williamques 2023-11-13 12:56:57 -0500 361)             button_text.setAttribute("class", "filter_text");
+88816936 (williamques 2023-11-13 12:56:57 -0500 362)             button.setAttribute("class", "filter_option");
+88816936 (williamques 2023-11-13 12:56:57 -0500 363)             button.addEventListener("click", () => filter_chosen(by, list[i]));
+88816936 (williamques 2023-11-13 12:56:57 -0500 364)             button_text.appendChild(button_node);
+88816936 (williamques 2023-11-13 12:56:57 -0500 365)             button.appendChild(button_text);
+88816936 (williamques 2023-11-13 12:56:57 -0500 366)             filter.appendChild(button);
+88816936 (williamques 2023-11-13 12:56:57 -0500 367)         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 368)     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 369) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 370)     function filter_clicked() {
+88816936 (williamques 2023-11-13 12:56:57 -0500 371)         const filter = document.getElementById("filter");
+88816936 (williamques 2023-11-13 12:56:57 -0500 372)         if (filter_open) {
+88816936 (williamques 2023-11-13 12:56:57 -0500 373)             clear_filter();
+88816936 (williamques 2023-11-13 12:56:57 -0500 374)             filter_open = false;
+88816936 (williamques 2023-11-13 12:56:57 -0500 375)         } else {
+88816936 (williamques 2023-11-13 12:56:57 -0500 376)             filter_open = true;
+88816936 (williamques 2023-11-13 12:56:57 -0500 377)             const artist = document.createElement("button");
+88816936 (williamques 2023-11-13 12:56:57 -0500 378)             const artist_text = document.createElement("p");
+88816936 (williamques 2023-11-13 12:56:57 -0500 379)             const artist_node = document.createTextNode("Artists");
+88816936 (williamques 2023-11-13 12:56:57 -0500 380)             artist_text.setAttribute("class", "filter_text");
+88816936 (williamques 2023-11-13 12:56:57 -0500 381)             artist.setAttribute("class", "filter_option");
+88816936 (williamques 2023-11-13 12:56:57 -0500 382)             artist.addEventListener("click", () => fill_filter("Artist"));
+88816936 (williamques 2023-11-13 12:56:57 -0500 383)             artist_text.appendChild(artist_node);
+88816936 (williamques 2023-11-13 12:56:57 -0500 384)             artist.appendChild(artist_text);
+88816936 (williamques 2023-11-13 12:56:57 -0500 385)             filter.appendChild(artist);
+88816936 (williamques 2023-11-13 12:56:57 -0500 386) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 387)             const album = document.createElement("button");
+88816936 (williamques 2023-11-13 12:56:57 -0500 388)             const album_text = document.createElement("p");
+88816936 (williamques 2023-11-13 12:56:57 -0500 389)             const album_node = document.createTextNode("Albums");
+88816936 (williamques 2023-11-13 12:56:57 -0500 390)             album_text.setAttribute("class", "filter_text");
+88816936 (williamques 2023-11-13 12:56:57 -0500 391)             album.setAttribute("class", "filter_option");
+88816936 (williamques 2023-11-13 12:56:57 -0500 392)             album.addEventListener("click", () => fill_filter("Album"));
+88816936 (williamques 2023-11-13 12:56:57 -0500 393)             album_text.appendChild(album_node);
+88816936 (williamques 2023-11-13 12:56:57 -0500 394)             album.appendChild(album_text);
+88816936 (williamques 2023-11-13 12:56:57 -0500 395)             filter.appendChild(album);
+88816936 (williamques 2023-11-13 12:56:57 -0500 396)         }
+88816936 (williamques 2023-11-13 12:56:57 -0500 397)     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 398) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 399)     function playlist_clicked() {
+88816936 (williamques 2023-11-13 12:56:57 -0500 400) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 401)     }
+88816936 (williamques 2023-11-13 12:56:57 -0500 402) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 403)     React.useEffect(() => {
+88816936 (williamques 2023-11-13 12:56:57 -0500 404)         const filter_div = document.createElement("div");
+88816936 (williamques 2023-11-13 12:56:57 -0500 405)         filter_div.setAttribute("class", "filter");
+88816936 (williamques 2023-11-13 12:56:57 -0500 406)         filter_div.setAttribute("id", "filter");
+88816936 (williamques 2023-11-13 12:56:57 -0500 407)         document.body.appendChild(filter_div);
+88816936 (williamques 2023-11-13 12:56:57 -0500 408) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 409)         const lib = document.createElement("div");
+88816936 (williamques 2023-11-13 12:56:57 -0500 410)         lib.setAttribute("id", "library");
+88816936 (williamques 2023-11-13 12:56:57 -0500 411)         document.body.appendChild(lib);
+88816936 (williamques 2023-11-13 12:56:57 -0500 412) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 413)         load_info();
+88816936 (williamques 2023-11-13 12:56:57 -0500 414)         apply_changes("sort", "Title"); // sorts by title name by default
+88816936 (williamques 2023-11-13 12:56:57 -0500 415)         display_songs();
+88816936 (williamques 2023-11-13 12:56:57 -0500 416)     });
+88816936 (williamques 2023-11-13 12:56:57 -0500 417) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 418)     // USER INTERFACE, modified by above code:
+f025d502 (williamques 2023-11-13 12:11:02 -0500 419)     return (
+f025d502 (williamques 2023-11-13 12:11:02 -0500 420)         <View style={styles.screensize}>
+88816936 (williamques 2023-11-13 12:56:57 -0500 421)             <div id="top_bar">
+88816936 (williamques 2023-11-13 12:56:57 -0500 422)                 <button id="sort_button" class="top_button" onClick={sort_clicked}>
+88816936 (williamques 2023-11-13 12:56:57 -0500 423)                     <p id="sort_text" class="top_text">Sorting by Title</p>
+88816936 (williamques 2023-11-13 12:56:57 -0500 424)                 </button>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 425) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 426)                 <button id="filter_button" class="top_button" onClick={filter_clicked}>
+88816936 (williamques 2023-11-13 12:56:57 -0500 427)                     <p class="top_text">Filter</p>
+88816936 (williamques 2023-11-13 12:56:57 -0500 428)                 </button>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 429) 
+88816936 (williamques 2023-11-13 12:56:57 -0500 430)                 <button id="playlist_button" class="top_button" onClick={playlist_clicked}>
+88816936 (williamques 2023-11-13 12:56:57 -0500 431)                     <p class="top_text">Playlists</p>
+88816936 (williamques 2023-11-13 12:56:57 -0500 432)                 </button>
+88816936 (williamques 2023-11-13 12:56:57 -0500 433)             </div>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 434) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 435)             <Separator />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 436) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 437)             <View style={styles.libbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 438)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 439)                     title="Library"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 440)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 441)                     onPress={() => navigation.navigate('Library Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 442)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 443)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 444)             <View style={styles.editbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 445)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 446)                     title="Editor"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 447)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 448)                     onPress={() => navigation.navigate('Editor Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 449)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 450)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 451)             <View style={styles.explorebtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 452)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 453)                     title="Explore"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 454)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 455)                     onPress={() => navigation.navigate('Explore Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 456)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 457)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 458)             <View style={styles.accbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 459)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 460)                     title="Account"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 461)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 462)                     onPress={() => navigation.navigate('Account Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 463)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 464)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 465)         </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 466)     );
+f025d502 (williamques 2023-11-13 12:11:02 -0500 469) const EditorScreen = ({ navigation }) => {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 470)     // Functionality
+f025d502 (williamques 2023-11-13 12:11:02 -0500 471)     // Define initial state variables
+f025d502 (williamques 2023-11-13 12:11:02 -0500 472)     const initialLeftHandlePosition = 0;
+f025d502 (williamques 2023-11-13 12:11:02 -0500 473)     const initialRightHandlePosition = 36000;
+f025d502 (williamques 2023-11-13 12:11:02 -0500 474)     const scrubInterval = 10;
+f025d502 (williamques 2023-11-13 12:11:02 -0500 475) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 476)     // Use the useState hook to manage state
+f025d502 (williamques 2023-11-13 12:11:02 -0500 477)     const [playing, setPlaying] = useState(false);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 478)     const [trimmerLeftHandlePosition, setTrimmerLeftHandlePosition] = useState(initialLeftHandlePosition);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 479)     const [trimmerRightHandlePosition, setTrimmerRightHandlePosition] = useState(initialRightHandlePosition);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 480)     const [scrubberPosition, setScrubberPosition] = useState(1000);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 481)     const [scrubberInterval, setScrubberInterval] = useState(null);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 482) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 483)     // Function to start playing
+f025d502 (williamques 2023-11-13 12:11:02 -0500 484)     const play = () => {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 485)         setPlaying(true);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 486) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 487)         // Update position of scrubber
+f025d502 (williamques 2023-11-13 12:11:02 -0500 488)         const interval = setInterval(() => {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 489)             setScrubberPosition((prevPosition) => prevPosition + scrubInterval);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 490)         }, scrubInterval);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 491) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 492)         setScrubberInterval(interval);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 493)     };
+f025d502 (williamques 2023-11-13 12:11:02 -0500 494) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 495)     // Function to pause
+f025d502 (williamques 2023-11-13 12:11:02 -0500 496)     const pause = () => {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 497)         clearInterval(scrubberInterval);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 498) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 499)         // Stop position of scrubber
+f025d502 (williamques 2023-11-13 12:11:02 -0500 500)         setPlaying(false);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 501)     };
+f025d502 (williamques 2023-11-13 12:11:02 -0500 502) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 503)     // Function to handle change of trimming size
+f025d502 (williamques 2023-11-13 12:11:02 -0500 504)     const onHandleChange = ({ leftPosition, rightPosition }) => {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 505)         setTrimmerLeftHandlePosition(leftPosition);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 506)         setTrimmerRightHandlePosition(rightPosition);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 507)     };
+f025d502 (williamques 2023-11-13 12:11:02 -0500 508) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 509)     // Function to keep scrubber at position it was left off
+f025d502 (williamques 2023-11-13 12:11:02 -0500 510)     const onScrubbingComplete = (newValue) => {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 511)         setPlaying(false);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 512)         setScrubberPosition(newValue);
+f025d502 (williamques 2023-11-13 12:11:02 -0500 513)     };
+f025d502 (williamques 2023-11-13 12:11:02 -0500 514) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 515)     // User Interface
+f025d502 (williamques 2023-11-13 12:11:02 -0500 516)     return (
+f025d502 (williamques 2023-11-13 12:11:02 -0500 517)         <View style={styles.screensize}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 518)             <View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 519)                 <Trimmer
+f025d502 (williamques 2023-11-13 12:11:02 -0500 520)                     onHandleChange={onHandleChange}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 521)                     totalDuration={totalDuration} // Make sure to define totalDuration
+f025d502 (williamques 2023-11-13 12:11:02 -0500 522)                     trimmerLeftHandlePosition={trimmerLeftHandlePosition}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 523)                     trimmerRightHandlePosition={trimmerRightHandlePosition}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 524)                     minimumTrimDuration={minimumTrimDuration} // Make sure to define minimumTrimDuration
+f025d502 (williamques 2023-11-13 12:11:02 -0500 525)                     maxTrimDuration={maxTrimDuration} // Make sure to define maxTrimDuration
+f025d502 (williamques 2023-11-13 12:11:02 -0500 526)                     scaleInOnInit={false}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 527)                     tintColor="blue"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 528)                     markerColor="grey"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 529)                     trackBackgroundColor="powderblue"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 530)                     trackBorderColor="blue"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 531)                     scrubberColor="black"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 532)                     scrubberPosition={scrubberPosition}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 533)                     onScrubbingComplete={onScrubbingComplete}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 534)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 535)                 <Button title="Pause" color="darkblue" onPress={pause} />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 536)                 <Button title="Play" color="darkblue" onPress={play} />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 537)                 <Button title="Cut" color="darkblue" onPress={play} />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 538)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 539) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 540)             <Separator />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 541) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 542)             <View style={styles.libbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 543)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 544)                     title="Library"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 545)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 546)                     onPress={() => navigation.navigate('ibrary Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 547)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 548)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 549)             <View style={styles.editbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 550)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 551)                     title="Editor"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 552)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 553)                     onPress={() => navigation.navigate('Editor Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 554)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 555)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 556)             <View style={styles.explorebtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 557)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 558)                     title="Explore"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 559)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 560)                     onPress={() => navigation.navigate('Explore Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 561)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 562)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 563)             <View style={styles.accbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 564)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 565)                     title="Account"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 566)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 567)                     onPress={() => navigation.navigate('Account Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 568)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 569)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 570)         </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 571)     );
+f025d502 (williamques 2023-11-13 12:11:02 -0500 572) };
+f025d502 (williamques 2023-11-13 12:11:02 -0500 575) const ExploreScreen = ({ navigation }) => {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 576) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 577)     return (
+f025d502 (williamques 2023-11-13 12:11:02 -0500 578)         <View style={styles.screensize}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 579)             <Text style={styles.paragraph}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 580)                 Welcome. This is the Explore page. More features will be added soon.
+f025d502 (williamques 2023-11-13 12:11:02 -0500 581)             </Text>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 582) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 583)             <Separator />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 584) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 585)             <View style={styles.libbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 586)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 587)                     title="Library"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 588)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 589)                     onPress={() => navigation.navigate('Library Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 590)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 591)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 592)             <View style={styles.editbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 593)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 594)                     title="Editor"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 595)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 596)                     onPress={() => navigation.navigate('Editor Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 597)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 598)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 599)             <View style={styles.explorebtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 600)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 601)                     title="Explore"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 602)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 603)                     onPress={() => navigation.navigate('Explore Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 604)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 605)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 606)             <View style={styles.accbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 607)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 608)                     title="Account"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 609)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 610)                     onPress={() => navigation.navigate('Account Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 611)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 612)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 613)         </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 614)     );
+f025d502 (williamques 2023-11-13 12:11:02 -0500 618) const AccountScreen = ({ navigation }) => {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 619) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 620)     const [username, onChangeText] = useState('user');
+f025d502 (williamques 2023-11-13 12:11:02 -0500 621) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 622)     return (
+f025d502 (williamques 2023-11-13 12:11:02 -0500 623)         <View style={styles.screensize}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 624)             <Text style={styles.paragraph}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 625)                 Welcome. This is the Account page. More features will be added soon.
+f025d502 (williamques 2023-11-13 12:11:02 -0500 626)             </Text>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 627) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 628)             <Separator />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 629)             <Text style={styles.paragraph}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 630)                 Input a username.
+f025d502 (williamques 2023-11-13 12:11:02 -0500 631)             </Text>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 632)             <TextInput
+f025d502 (williamques 2023-11-13 12:11:02 -0500 633)                 style={styles.input}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 634)                 onChangeText={onChangeText}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 635)                 value={username}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 636)             />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 637)             <Text style={styles.paragraph}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 638)                 Hello, {username}.
+f025d502 (williamques 2023-11-13 12:11:02 -0500 639)             </Text>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 640)             <Separator />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 641) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 642)             <View style={styles.libbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 643)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 644)                     title="Library"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 645)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 646)                     onPress={() => navigation.navigate('Library Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 647)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 648)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 649)             <View style={styles.editbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 650)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 651)                     title="Editor"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 652)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 653)                     onPress={() => navigation.navigate('Editor Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 654)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 655)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 656)             <View style={styles.explorebtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 657)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 658)                     title="Explore"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 659)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 660)                     onPress={() => navigation.navigate('Explore Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 661)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 662)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 663)             <View style={styles.accbtn}>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 664)                 <Button
+f025d502 (williamques 2023-11-13 12:11:02 -0500 665)                     title="Account"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 666)                     color="#aaaaaa"
+f025d502 (williamques 2023-11-13 12:11:02 -0500 667)                     onPress={() => navigation.navigate('Account Page')}
+f025d502 (williamques 2023-11-13 12:11:02 -0500 668)                 />
+f025d502 (williamques 2023-11-13 12:11:02 -0500 669)             </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 670)         </View>
+f025d502 (williamques 2023-11-13 12:11:02 -0500 671) 
+f025d502 (williamques 2023-11-13 12:11:02 -0500 672)     );
+f025d502 (williamques 2023-11-13 12:11:02 -0500 677)     paragraph: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 678)         margin: 24,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 679)         fontSize: 14,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 680)         textAlign: 'center',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 681)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 682)     logo: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 683)         paddingTop: 200,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 684)         height: 400,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 685)         fontWeight: 'bold',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 686)         fontSize: 40,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 687)         textAlign: 'center',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 688)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 689)     screensize: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 690)         height: 755,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 691)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 692)     input: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 693)         borderWidth: 1,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 694)         padding: 10,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 695)         margin: 12,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 696)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 697)     playbtn: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 698)         width: 50,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 699)         height: 50,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 700)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 701)     separator: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 702)         marginVertical: 8,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 703)         borderBottomColor: '#737373',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 704)         borderBottomWidth: StyleSheet.hairlineWidth,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 705)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 706)     libbtn: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 707)         right: 300,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 708)         left: 0,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 709)         width: "26%",
+f025d502 (williamques 2023-11-13 12:11:02 -0500 710)         position: 'absolute',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 711)         bottom: 0,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 712)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 713)     editbtn: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 714)         right: 200,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 715)         left: 105,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 716)         width: "26%",
+f025d502 (williamques 2023-11-13 12:11:02 -0500 717)         position: 'absolute',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 718)         bottom: 0,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 719)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 720)     explorebtn: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 721)         right: 100,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 722)         left: 206,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 723)         width: "26%",
+f025d502 (williamques 2023-11-13 12:11:02 -0500 724)         position: 'absolute',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 725)         bottom: 0,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 726)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 727)     accbtn: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 728)         right: 0,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 729)         left: 307,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 730)         width: "26%",
+f025d502 (williamques 2023-11-13 12:11:02 -0500 731)         position: 'absolute',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 732)         bottom: 0,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 733)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 734)     title: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 735)         opacity: 0,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 736)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 737)     trackplayer: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 738)         flex: 1,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 739)         alignItems: "center",
+f025d502 (williamques 2023-11-13 12:11:02 -0500 740)         flexDirection: 'row',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 741)         flexWrap: 'wrap',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 742)         borderTopWidth: 1,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 743)         borderBottomWidth: 1,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 744)         borderColor: '#737373',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 745)         width: '100%',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 746)         fontSize: 24,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 747)         position: "absolute",
+f025d502 (williamques 2023-11-13 12:11:02 -0500 748)         bottom: 37
+f025d502 (williamques 2023-11-13 12:11:02 -0500 749)     },
+f025d502 (williamques 2023-11-13 12:11:02 -0500 750)     container: {
+f025d502 (williamques 2023-11-13 12:11:02 -0500 751)         flex: 1,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 752)         alignItems: "center",
+f025d502 (williamques 2023-11-13 12:11:02 -0500 753)         justifyContent: "center",
+f025d502 (williamques 2023-11-13 12:11:02 -0500 754)         flexDirection: 'row',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 755)         flexWrap: 'wrap',
+f025d502 (williamques 2023-11-13 12:11:02 -0500 756)         paddingTop: 20,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 757)         paddingBottom: 20,
+f025d502 (williamques 2023-11-13 12:11:02 -0500 758)     }

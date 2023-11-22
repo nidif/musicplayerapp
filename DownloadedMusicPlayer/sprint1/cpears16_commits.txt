@@ -1,0 +1,108 @@
+// Note: these functions haven't been merged with the UI yet, so there was nowhere to commit to during the sprint.
+// But the code I wrote is still provided here
+
+function get_songs(dst_list, src_list, by, name){
+	var index = 0;
+	for(let i = 0; i < Object.keys(src_list).length; i++){
+		if(src_list[i][by] == name){ // if a track's title/album/artist name matches the given name
+			dst_list[index] = src_list[i];
+			index += 1;
+		}
+	}
+}
+
+function sort(list, by){
+	// for now uses bubble sort, but could be revised for faster sorting later
+	var length = Object.keys(list).length;
+	for(let i = 0; i < length - 1; i++){
+		var swap_necessary = false;
+		for(let j = 0; j < length - 1 - i; j++){
+			if(list[j][by] > list[j+1][by]){
+				swap_necessary = true;
+				var entry = list[j];
+				list[j] = list[j+1];
+				list[j+1] = entry;
+			}
+		}
+
+		if(swap_necessary == false){
+			break;
+		}
+	}
+}
+
+function print_list(list){
+	console.log("\n");
+	var length = Object.keys(list).length;
+	for(let i = 0; i < length; i++){
+		console.log(list[i]["Title"] + " | " + list[i]["Artist"] + " | " + list[i]["Album"]);
+	}
+}
+
+function display_library(behavior, by, name){
+	var track_list = {};
+
+	// loads arbitrary data into the list as a placeholder
+	// will read each file's metadata into this table when file finder functionality is completed
+	for(let i = 0; i < 20; i++){ 
+		var new_info = {};
+		new_info["Title"] = "Track" + (Math.floor(Math.random() * 90)+10);
+		var a = "Helo";
+		if(i < 10){
+			a = "Jelo";
+		}
+		new_info["Artist"] = a;
+		new_info["Album"] = "AlbumName";
+		track_list[i] = new_info;
+	}
+	
+	// 'behavior' determines if it's sort or filter
+	// 'by' determines what to sort or filter by ("Title", "Artist", "Album")
+	// 'name' is what artist/playlist/album name to filter by
+	if(behavior == "sort"){
+		if(by == "Title"){
+			sort(list, by);
+		}else{
+			var index = 0;
+			var all_artists = {}; // list of all artists/albums in the library
+			for(let i = 0; i < Object.keys(track_list).length; i++){
+				var do_not_add = false;
+				for(let j = 0; j < Object.keys(all_artists).length; j++){
+					if(all_artists[j][by] == track_list[i][by]){
+						do_not_add = true;
+						break;
+					}
+				}
+				if(do_not_add == false){
+					var new_info = {};
+					new_info[by] = track_list[i][by];
+					all_artists[index] = new_info;
+					index += 1;
+				}
+			}
+
+			sort(all_artists, by);
+			var temp_list = {};
+			for(let k = 0; k < Object.keys(all_artists).length; k++){
+				var filtered_songs = {};
+				get_songs(filtered_songs, track_list, by, all_artists[k][by]); // partitions by category
+				sort(filtered_songs, "Title"); // sorts each category
+				
+				var start = Object.keys(temp_list).length;
+				for(let i = 0; i < Object.keys(filtered_songs).length; i++){ // adds to main list
+					temp_list[start+i] = filtered_songs[i];
+				}
+			}
+			track_list = temp_list;
+		}
+	}else if(behavior == "filter"){
+		var filtered_list = {};
+		get_songs(filtered_list, track_list, by, name);
+		track_list = filtered_list;
+	}
+
+	// once tab functionality is added, can loop through track_list and add buttons for each song here
+}
+
+//display_library("filter", "Artist", "Helo");
+//display_library("sort", "Artist");

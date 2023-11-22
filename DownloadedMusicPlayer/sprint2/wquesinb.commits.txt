@@ -1,0 +1,94 @@
+dc326b04 (williamques 2023-10-30 21:16:20 -0400   1) import { exportPreferences, importPreferences } from './preferences.mjs';
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  18) const importButton = ({ onPress }) => (
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  19)   // ...
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  20) );
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  37)     // Handle folder search
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  38)     const handleButtonPress = () => {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  39)         // Iterate through the dictionary of folders and search for MP3s in each.
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  40)         for (const folderName in folders) {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  41)             if (folders.hasOwnProperty(folderName)) {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  42)                 const folderPath = folders[folderName];
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  43)                 searchForMP3s(folderPath, folderName);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  44)             }
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  45)         }
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  46)         alert('Button pressed!');
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  47)     };
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  48) 
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  49)     return (
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  50)         <View>
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  51)             <folderButton onPress={handleButtonPress} />
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  52)         </View>
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  53)     );
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  54) 
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  67) 
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  68)   // Handle Import Preferences
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  69)     const handleButtonPress = () => {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  70)         importPreferences(dir, library);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  71)         alert('Button pressed!');
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  72)     };
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  73) 
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  74)   return (
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  75)     <View>
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  76)       <importButton onPress={handleButtonPress} />
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  77)     </View>
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  78)   );
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  80) 
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  81) // Function to recursively search for MP3 files in a folder.
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  82) function searchForMP3s(dir, folderName) {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  83)     const files = fs.readdirSync(dir);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  84) 
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  85)     files.forEach((file) => {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  86)         const filePath = path.join(dir, file);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  87) 
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  88)     if (fs.statSync(filePath).isDirectory()) {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  89)         // If it's a directory, recursively search it.
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  90)         searchForMP3s(filePath, folderName);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  91)     } else {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  92)         // Check if the file is an MP3.
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  93)         if (path.extname(filePath) === '.mp3') {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  94)             // Add the MP3 file to the dictionary using the folder name and file name as keys.
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  95)             mp3Dictionary[folderName] = mp3Dictionary[folderName] || [];
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  96)             mp3Dictionary[folderName].push(filePath);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  97)         }
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  98)     }
+dc326b04 (williamques 2023-10-30 21:16:20 -0400  99)   });
+f7ed058d (williamques 2023-10-30 21:45:30 -0400 100) }
+f7ed058d (williamques 2023-10-30 21:45:30 -0400 101) 
+f7ed058d (williamques 2023-10-30 21:45:30 -0400 102) // Function to handle imported preferences
+f7ed058d (williamques 2023-10-30 21:45:30 -0400 103) function handleImportedPreferences(preferences) {
+f7ed058d (williamques 2023-10-30 21:45:30 -0400 104)     // Check if preferences are valid
+f7ed058d (williamques 2023-10-30 21:45:30 -0400 105)     if (preferences && Array.isArray(preferences)) {
+f7ed058d (williamques 2023-10-30 21:45:30 -0400 106)         // You can now use the preferences as needed
+f7ed058d (williamques 2023-10-30 21:45:30 -0400 107)     } else {
+f7ed058d (williamques 2023-10-30 21:45:30 -0400 108)         console.error('Invalid preferences data.');
+f7ed058d (williamques 2023-10-30 21:45:30 -0400 109)     }
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 110) }
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 41) 
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 42) // Function to import user preferences from a file
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 43) export function importPreferences(dir, callback) {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 44)     const baseDir = path.join(__dirname, dir);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 45)     const fileName = path.join(baseDir, 'preferences.json');
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 46) 
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 47)     // Check if the file exists
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 48)     fs.access(fileName, fs.constants.F_OK, (err) => {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 49)         if (err) {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 50)             console.error(`File ${fileName} does not exist.`);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 51)             return;
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 52)         }
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 53) 
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 54)         // Read the file
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 55)         fs.readFile(fileName, 'utf8', (err, data) => {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 56)             if (err) {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 57)                 console.error('Error reading JSON file:', err);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 58)                 return;
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 59)             }
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 60) 
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 61)             try {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 62)                 const preferences = JSON.parse(data);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 63)                 callback(preferences);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 64)             } catch (jsonError) {
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 65)                 console.error('Error parsing JSON:', jsonError);
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 66)             }
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 67)         });
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 68)     });
+dc326b04 (williamques 2023-10-30 21:16:20 -0400 69) }

@@ -1,0 +1,293 @@
+Library.js
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500   3) import add from './add.png';
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500   8)         var filter_open = false;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500   9)         var playlist_open = false;
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500  10)         var change_open = false;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500  11)         var playlist_filter = false;
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500  12)         var persistent_list = {};
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500  15)         var playlists = {};
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500  44)                 for(let i = 0; i < Object.keys(persistent_list).length; i++){
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500  45)                         var name = persistent_list[i][category];
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500  50)                 return list;
+29bacae2 (collinspearson 2023-10-30 18:01:03 -0400  52)
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500  53)         // still arbitrary data, will read metadata once it's added
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500  56)                         var path = "placeholder" + i + ".mp3";
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500  65)                         new_info["Path"] = path;
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500  66)                         persistent_list[i] = new_info;
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500  67)                         //track_list[i] = new_info;
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500  69)                 track_list = persistent_list;
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 106)                 //load_info();
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 107)                 track_list = persistent_list;
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 148)                         sort(filtered_list, current_sort);
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 164)                         const playlist_div = document.createElement("div");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 165)                         list_div.setAttribute("class", "track");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 166)                         button_div.setAttribute("class", "play_section");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 167)                         text_div.setAttribute("class", "text_section");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 168)                         playlist_div.setAttribute("class", "playlist_section");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 169)                         separator_div.setAttribute("style", "height: 5px; width: 100%;")
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 178)                         const play_button = document.createElement("button");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 179)                         const playlist_button = document.createElement("button");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 180)                         play_button.setAttribute("class", "play_button")
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 181)                         playlist_button.setAttribute("class", "playlist_button");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 182)
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 183)                         const play_image = document.createElement("img");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 184)                         play_image.setAttribute("src", logo)
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 185)                         play_image.setAttribute("class", "play_image");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 186)                         play_button.appendChild(play_image);
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 187)                         play_button.addEventListener("click", () => play(i));
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 188)
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 189)                         const playlist_image = document.createElement("img");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 190)                         playlist_image.setAttribute("src", add)
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 191)                         playlist_image.setAttribute("class", "playlist_image");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 192)                         playlist_button.appendChild(playlist_image);
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 193)                         playlist_button.addEventListener("click", () => {
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 194)                                 fill_playlist("add", track_list[i].Path);
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 195)                         });
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 206)                         list_div.appendChild(playlist_div);
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 207)                         playlist_div.appendChild(playlist_button);
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 208)
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 237)                 undo_playlist();
+29bacae2 (collinspearson 2023-10-30 18:01:03 -0400 239)
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 240)         function clear_filter(){
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 241)                 const filter = document.getElementById("filter");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 242)                 while(filter.hasChildNodes()){
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 243)                         filter.removeChild(filter.firstChild);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 244)                 }
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 245)         }
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 246)
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 247)         function filter_chosen(by, name){
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 248)                 clear_filter();
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 249)                 filter_open = false;
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 250)                 apply_changes("filter", by, name);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 251)                 clear_songs();
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 252)                 display_songs();
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 253)                 undo_playlist();
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 254)         }
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 255)
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 256)         function add_song(playlist_index, path){
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 257)
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 258)                 var new_index = playlists[playlist_index].Order.length;
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 259)                 console.log("Add " + path + " at " + new_index);
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 260)                 playlists[playlist_index].Order[new_index] = path;
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 261)                 for(let i = 0; i < playlists[playlist_index].Order.length; i++){
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 262)                         console.log(playlists[playlist_index].Order[i]);
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 263)                 }
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 264)         }
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 265)
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 266)         function fill_filter(by){
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 267)                 const filter = document.getElementById("filter");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 268)                 clear_filter();
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 269)                 var list = get_names(by);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 270)                 for(let i = 0; i < list.length; i++){
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 271)                         const button = document.createElement("button");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 272)                         const button_text = document.createElement("p");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 273)                         const button_node = document.createTextNode(list[i]);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 274)                         button_text.setAttribute("class", "filter_text");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 275)                         button.setAttribute("class", "filter_option");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 276)                         button.addEventListener("click", () => filter_chosen(by, list[i]));
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 277)
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 278)                         button_text.appendChild(button_node);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 279)                         button.appendChild(button_text);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 280)                         filter.appendChild(button);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 281)                 }
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 282)         }
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 283)
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 285)                 const filter = document.getElementById("filter");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 286)                 if(filter_open){
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 287)                         clear_filter();
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 288)                         filter_open = false;
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 289)                 }else{
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 290)                         clear_filter();
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 291)                         filter_open = true;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 292)                         playlist_open = false;
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 293)                         change_open = false;
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 294)                         const artist = document.createElement("button");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 295)                         const artist_text = document.createElement("p");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 296)                         const artist_node = document.createTextNode("Artists");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 297)                         artist_text.setAttribute("class", "filter_text");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 298)                         artist.setAttribute("class", "filter_option");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 299)                         artist.addEventListener("click", () => fill_filter("Artist"));
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 300)                         artist_text.appendChild(artist_node);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 301)                         artist.appendChild(artist_text);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 302)                         filter.appendChild(artist);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 303)
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 304)                         const album = document.createElement("button");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 305)                         const album_text = document.createElement("p");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 306)                         const album_node = document.createTextNode("Albums");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 307)                         album_text.setAttribute("class", "filter_text");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 308)                         album.setAttribute("class", "filter_option");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 309)                         album.addEventListener("click", () => fill_filter("Album"));
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 310)                         album_text.appendChild(album_node);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 311)                         album.appendChild(album_text);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 312)                         filter.appendChild(album);
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 313)                 }
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 314)         }
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 315)
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 316)         function find_by_path(path){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 317)                 for(let i = 0; i < Object.keys(persistent_list).length; i++){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 318)                         if(persistent_list[i].Path == path){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 319)                                 return i;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 320)                         }
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 321)                 }
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 322)         }
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 323)
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 324)         function display_playlist(index){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 325)                 // loop through playlist
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 326)                 var list = {}
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 327)                 for(let i = 0; i < playlists[index].Order.length; i++){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 328)                         var track_index = find_by_path(playlists[index].Order[i]);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 329)                         list[i] = persistent_list[track_index];
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 330)                 }
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 331)                 track_list = list;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 332)                 clear_songs();
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 333)                 display_songs();
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 334)                 clear_filter();
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 335)                 playlist_open = false;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 336)                 playlist_filter = true;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 337)                 document.getElementById("playlist_text").textContent = "Back";
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 338)                 document.getElementById("sort_text").textContent = "Sorting by Title";
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 339)                 current_sort = "Title";
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 340)         }
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 341)
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 342)         function fill_playlist(intent, path){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 343)                 const filter = document.getElementById("filter");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 344)                 clear_filter();
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 345)                 if(Object.keys(playlists).length == 0){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 346)                         playlist_open = false;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 347)                 }
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 348)                 for(let i = 0; i < Object.keys(playlists).length; i++){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 349)                         const button = document.createElement("button");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 350)                         const button_text = document.createElement("p");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 351)                         const button_node = document.createTextNode(playlists[i].Name);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 352)                         button_text.setAttribute("class", "filter_text");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 353)                         button.setAttribute("class", "filter_option");
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 354)                         if(intent == "add"){
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 355)                                 button.addEventListener("click", () => add_song(i, path));
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 356)                         }else{
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 357)                                 button.addEventListener("click", () => display_playlist(i));
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 358)                         }
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 359)
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 360)                         button_text.appendChild(button_node);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 361)                         button.appendChild(button_text);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 362)                         filter.appendChild(button);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 363)                 }
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 364)         }
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 365)
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 366)         function new_playlist(){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 367)                 clear_filter();
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 368)                 playlist_open = false;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 369)                 var i = Object.keys(playlists).length;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 370)                 playlists[i] = {
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 371)                         Name: "PlaylistName",
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 372)                         Order: ["placeholder1.mp3", "placeholder2.mp3", "placeholder3.mp3"]
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 373)                 }
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 374)         }
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 375)
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 376)         function undo_playlist(){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 377)                 document.getElementById("playlist_text").textContent = "Playlists";
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 378)                 playlist_filter = false;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 379)         }
+29bacae2 (collinspearson 2023-10-30 18:01:03 -0400 380)
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 381)         function playlist_clicked(){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 382)                 const filter = document.getElementById("filter");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 383)                 if(playlist_filter){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 384)                         apply_changes("sort", current_sort);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 385)                         clear_songs();
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 386)                         display_songs();
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 387)                         undo_playlist();
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 388)                 }else if(playlist_open){
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 389)                         clear_filter();
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 390)                         playlist_open = false;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 391)                 }else{
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 392)                         clear_filter();
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 393)                         playlist_open = true;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 394)                         filter_open = false;
+ac62fe72 (collinspearson 2023-11-13 22:20:10 -0500 395)                         change_open = false;
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 396)                         const playlist = document.createElement("button");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 397)                         const playlist_text = document.createElement("p");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 398)                         const playlist_node = document.createTextNode("Add New Playlist");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 399)                         playlist_text.setAttribute("class", "filter_text");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 400)                         playlist.setAttribute("class", "filter_option");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 401)                         playlist.addEventListener("click", () => new_playlist());
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 402)                         playlist_text.appendChild(playlist_node);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 403)                         playlist.appendChild(playlist_text);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 404)                         filter.appendChild(playlist);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 405)
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 406)                         const view = document.createElement("button");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 407)                         const view_text = document.createElement("p");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 408)                         const view_node = document.createTextNode("View Playlists");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 409)                         view_text.setAttribute("class", "filter_text");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 410)                         view.setAttribute("class", "filter_option");
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 411)                         view.addEventListener("click", () => fill_playlist());
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 412)                         view_text.appendChild(view_node);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 413)                         view.appendChild(view_text);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 414)                         filter.appendChild(view);
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 415)                 }
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 421)                 filter_div.setAttribute("id", "filter");
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 427)
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 428)                 load_info();
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 435)                 <div id="top_bar">
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 443)
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 444)                         <button id="playlist_button" class="top_button" onClick={playlist_clicked}>
+556e9a59 (collinspearson 2023-11-13 18:23:22 -0500 445)                                 <p id="playlist_text" class="top_text">Playlists</p>
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 446)                         </button>
+7c8c3259 (collinspearson 2023-11-13 11:52:49 -0500 449) }
+
+
+
+Library.css
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  44) .play_section{
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  45)         float: left;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  46)         display: inline;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  47)         position: relative;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  48)         left: 10px;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  49)         top: 10px;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  50)         width: 100px;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  51)         height: 100%;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  52)         opacity: 1;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  53) }
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  54)
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  55) .play_button{
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  56)         width: 80%;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  57)         height: 80%;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  58)         border-radius: 10px;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  59)         background-color: white;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  60) }
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  61)
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  70)         height: 100%;
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  75) }
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  76)
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  77) .filter_option{
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  78)         width: 100%;
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  79)         background-color: rgb(255, 255, 255);
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  80)         height: 40px;
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  81) }
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  82)
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  83) .filter_text{
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  84)         font: 18px Verdana;
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  85)         line-height: 0;
+cc3da277 (collinspearson 2023-11-13 11:53:30 -0500  86) }
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  87)
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  88) .playlist_section{
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  89)         float: right;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  90)         display: inline;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  91)         position: relative;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  92)         left: 10px;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  93)         top: 10px;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  94)         width: 100px;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  95)         height: 100%;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  96)         opacity: 1;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  97) }
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  98)
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500  99) .playlist_button{
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500 100)         width: 80%;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500 101)         height: 80%;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500 102)         border-radius: 10px;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500 103)         background-color: white;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500 104) }
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500 105)
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500 106) .playlist_image{
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500 107)         margin-top: 3px;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500 108)         width: 100%;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500 109)         height: 82%;
+2c01df56 (collinspearson 2023-11-13 22:20:37 -0500 110) }

@@ -1,0 +1,203 @@
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600   1) import React, { Component } from "react";
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600   2) import { View, Button, StyleSheet } from "react-native";
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600   3) import Trimmer from "react-native-trimmer";
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600   4) /*
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600   5) var AudioTools = require('react-native-audio-video-tools');
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600   6) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600   7) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600   8) const audioTools = new AudioTools('C:/Users/Mccad/OneDrive/Desktop/CS340/DownloadedMusicPlayer/DownloadedMusicPlayer/assets/sound.mp3');
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600   9) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  10) audioTools.getDetails().then(details => {
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  11)     console.log("Duration: " + details.duration);
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  12) })
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  13) */
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  14) const maxTrimDuration = 60000;
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  15) const minimumTrimDuration = 1000;
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  16) const totalDuration = 180000;
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  17) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  18) const initialLeftHandlePosition = 0;
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  19) const initialRightHandlePosition = 36000;
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  20) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  21) const scrubInterval = 10;
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  22) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  23) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  24) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  25) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  26) export default class Editor extends Component {
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  27) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  28)   // sets everything to off or initial Pos
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  29)   state = {
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  30)     playing: false,
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  31)     trimmerLeftHandlePosition: initialLeftHandlePosition,
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  32)     trimmerRightHandlePosition: initialRightHandlePosition,
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  33)     scrubberPosition: 1000
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  34)   };
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  35) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  36)   play = () => {
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  37)     this.setState({ playing: true });
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  38)     // update pos of scrubber
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  39)     this.scrubberInterval = setInterval(() => {
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  40)       this.setState({
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  41)         scrubberPosition: this.state.scrubberPosition + scrubInterval
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  42)       });
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  43)     }, scrubInterval);
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  44)   };
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  45) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  46)   pause = () => {
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  47)     clearInterval(this.scrubberInterval);
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  48)     // stops pos of scrubber
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  49)     this.setState({
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  50)       playing: false,
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  51)       scrubberPosition: this.state.scrubberPosition
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  52)     });
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  53)   };
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  54) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  55)   // deals with the change of the trimming size
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  56)   onHandleChange = ({ leftPosition, rightPosition }) => {
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  57)     this.setState({
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  58)       trimmerRightHandlePosition: rightPosition,
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  59)       trimmerLeftHandlePosition: leftPosition
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  60)     });
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  61)   };
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  62) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  63)   // keeps scrubber at postion it was left off
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  64)   onScrubbingComplete = (newValue) => {
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  65)     this.setState({ playing: false, scrubberPosition: newValue });
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  66)   };
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  67) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  68)   render() {
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  69)     const {
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  70)       trimmerLeftHandlePosition,
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  71)       trimmerRightHandlePosition,
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  72)       scrubberPosition,
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  73)     } = this.state;
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  74) 
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  75)     return (
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  76)       <View>
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  77)         <Trimmer
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  78)           onHandleChange={this.onHandleChange}
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  79)           totalDuration={totalDuration}
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  80)           trimmerLeftHandlePosition={trimmerLeftHandlePosition}
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  81)           trimmerRightHandlePosition={trimmerRightHandlePosition}
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  82)           minimumTrimDuration={minimumTrimDuration}
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  83)           maxTrimDuration={maxTrimDuration}
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  84)           //initialZoomValue={0.5}
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  85)           scaleInOnInit={false}
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  86)           tintColor="blue"
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  87)           markerColor="grey"
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  88)           trackBackgroundColor="powderblue"
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  89)           trackBorderColor="blue"
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  90)           scrubberColor="black"
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  91)           scrubberPosition={scrubberPosition}
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  92)           onScrubbingComplete={this.onScrubbingComplete}
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  93)         />
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  94)           <Button title="Pause" color="darkblue" onPress={this.pause} />
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  95)           <Button title="Play" color="darkblue" onPress={this.play} />
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  96)           <Button title="Cut" color="darkblue" onPress={this.play} />
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  97)       </View>
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  98)     );
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600  99)   }
+7f83b627 (PeytonMoore 2023-11-13 02:29:38 -0600 100) }
+
+
+AudioEditorUI.js
+
+
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400  1)
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400  2) import { StatusBar } from 'expo-status-bar';
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600  3) import { StyleSheet, View, Image,Text, Pressable, Share} from 'react-native';
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600  4) import Editor from './Editor.js';
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600  5) //import {AudioTools} from 'react-native-audio-video-tools';
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400  6)
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400  7) import Button from './button.js';
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400  8)
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400  9) export default function AudioEditorUI() {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 10)
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 11)     // sharing file to local storage
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 12)   const customShare = async () => {
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 13)
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 14)      Share.share(
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 15)       {
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 16)         title: "shared",
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 17)         message: "some message",
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 18)       }
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 19)      );
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 20)   };
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 21)
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 22)
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 23)   return (
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 24)       <View style={styles.container}>
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 25)       <View>
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 26)         <Text style={styles.title}>
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 27)           AUDIO EDITOR
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 28)         </Text>
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 29)         <Text style={styles.shareButton} color="black" onPress={customShare} /*SHARE BUTTON*/>
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 30)           SHARE
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 31)         </Text>
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 32)         <Editor /* AUDIO EDITOR PAGE */ />
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 33)       </View>
+22ae752b (PeytonMoore 2023-11-13 02:28:14 -0600 34)
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 35)     </View>
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 36)
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 37) const styles = StyleSheet.create({
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 38)   title: {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 39)     paddingTop: 40,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 40)     flex: 1 / 10,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 41)     color: 'yellow',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 42)     fontSize: 10,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 43)   },
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 44)   setTitleColor: {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 45)     color: 'white',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 46)   },
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 47)   setTitleFont: {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 48)     fontSize: 10,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 49)     fontWeight: 'bold',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 50)   },
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 51)   songTitle: {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 52)     paddingTop: 10,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 53)     flex: 1 / 10,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 54)     alignContent: 'center',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 55)     justifyContent: 'center',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 56)     color: 'white',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 57)     fontSize: 20,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 58)     left: -130,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 59)   },
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 60)   setSongColor: {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 61)     color: 'white',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 62)   },
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 63)   setSongFont: {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 64)     fontSize: 15,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 65)     fontWeight: 'bold',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 66)   },
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 67)   artistName: {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 68)     alignContent: 'center',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 69)     justifyContent: 'center',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 70)     color: 'white',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 71)     fontSize: 10,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 72)     left: -140,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 73)     shadowColor: 'black',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 74)     shadowOffset: 10,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 75)     shadowOpacity: 40,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 76)     shadowRadius: 100,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 77)   },
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 78)   setArtistColor: {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 79)     color: 'white',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 80)   },
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 81)   setArtistFont: {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 82)     fontSize: 10,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 83)     fontWeight: 'bold',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 84)   },
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 85)   container: {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 86)     flex: 1,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 87)     backgroundColor: 'purple',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 88)     alignItems: 'center',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 89)     justifyContent: 'center',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 90)   },
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 91)   footerContainer: {
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 92)     flex: 1,
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 93)     alignItems: 'center',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 94)     flexDirection: 'row',
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 95)   },
+a78e81d8 (PeytonMoore 2023-10-17 17:13:45 -0400 96) });
+~
+
