@@ -108,3 +108,54 @@
 	width: 100%;
 	height: 82%;
 }
+
+.rename{
+	width: 40%;
+	height: 110px;
+	position: fixed;
+	display: inline-block;
+	left: 30%;
+	top: 60px;
+	background-color: white;
+	border-radius: 10px;
+	border: solid;
+	border-width: 2px;
+	border-color: rgb(0,0,0);
+}
+
+.rename_input{
+	display: inline;
+	position: relative;
+	float: left;
+	top: 20px;
+	width: 80%;
+	left: 10%;
+}
+
+.save_button{
+	display: inline;
+	position: relative;
+	float: left;
+	top: 30px;
+	width: 80%;
+	left: 10%;
+	height: 40px;
+	border-radius: 8px;
+	background-color: rgb(255, 234, 255);
+	border-color: rgb(0,0,0);
+}
+
+.save_text{
+	font: 15px Verdana;
+	line-height: 0;
+}
+
+.rename_input{
+	box-sizing: border-box;
+	text-align: center;
+	border-width: 2px;
+	border-style: solid;
+	border-color: rgb(0,0,0);
+	font: 15px Verdana;
+	line-height: 0;
+}

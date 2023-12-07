@@ -1,0 +1,1 @@
+This is just a short program to get a bit of practice with JavaScript and Node.js, particularly in relation to saving data on a server. The information stored and received is printed out to the user on the webpage once the user opens up their computer as a server.

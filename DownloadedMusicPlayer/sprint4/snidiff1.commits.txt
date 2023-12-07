@@ -1,0 +1,293 @@
+---- DownloadedMusicPlayer\SkeletonCode\App.js ----
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 480) const EditorScreen = ({navigation}) => {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 481)
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 482)   // Functionality
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 483)   const customShare = async () => {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 484)     Share.share(
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 485)     {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 486)       title: "shared",
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 487)       message: "some message",
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 488)     }
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 489)     );
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 490)   };
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 491)
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 492)   return(
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 493)     <View style={styles.screensize}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 494)         <Text style={styles.audioTitle}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 495)           AUDIO EDITOR
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 496)         </Text>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 497)         <Text style={styles.shareButton} color="black" onPress={customShare} /*SHARE BUTTON*/>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 498)           SHARE
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 499)         </Text>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 500)         <Editor /* AUDIO EDITOR PAGE */ />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 501)
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 502)     <Separator />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 503)
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 504)
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 505)      <View style={styles.libbtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 506)        <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 507)          title="Library"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 508)          color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 509)          onPress={() => navigation.navigate('Library Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 510)        />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 511)      </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 512)      <View style={styles.editbtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 513)         <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 514)           title="Editor"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 515)           color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 516)           onPress={() => navigation.navigate('Editor Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 517)         />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 518)       </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 519)       <View style={styles.explorebtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 520)         <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 521)           title="Explore"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 522)           color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 523)           onPress={() => navigation.navigate('Explore Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 524)         />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 525)       </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 526)       <View style={styles.setbtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 527)        <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 528)          title="Settings"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 529)          color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 530)          onPress={() => navigation.navigate('Settings Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 531)        />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 532)      </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 533)    </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 534)   );
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 535) }
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 537) const ExploreScreen = ({navigation}) => {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 538)   const songjson = require('./songs.json');
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 539)
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 540)   var songlist = [];
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 541)
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 542)   for (let i = 0; i < 100; i++) {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 543)     songlist.push(
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 544)       <View key={i}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 545)       <Text style={{fontWeight: 'bold'}}>#{(songjson[i].position)}</Text>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 546)       <Text>{(songjson[i].name)} - {(songjson[i].artist)}</Text>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 547)       <Text> </Text>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 548)       </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 550)   }
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 553)   return(
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 554)     <View style={styles.screensize}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 555)     <ScrollView>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 556)     <Text style={{fontWeight: 'bold', fontSize: 20, margin:20, textAlign: 'center'}}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 557)     Billboard Hot 100
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 558)     </Text>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 559)     <Text style={{textAlign: 'center'}}>Explore some of today's hottest tracks.</Text>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 560)     <Separator />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 561)     <View style={{fontSize: 16, margin: 20, textAlign: 'center'}}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 562)     {songlist}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 563)     </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 564)     </ScrollView>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 565)     <Separator />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 566)      <View style={styles.libbtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 567)        <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 568)          title="Library"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 569)          color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 570)          onPress={() => navigation.navigate('Library Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 571)        />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 572)      </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 573)      <View style={styles.editbtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 574)         <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 575)           title="Editor"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 576)           color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 577)           onPress={() => navigation.navigate('Editor Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 578)         />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 579)       </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 580)       <View style={styles.explorebtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 581)         <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 582)           title="Explore"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 583)           color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 584)           onPress={() => navigation.navigate('Explore Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 585)         />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 586)       </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 587)       <View style={styles.setbtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 588)      <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 589)          title="Settings"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 590)          color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 591)          onPress={() => navigation.navigate('Settings Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 592)        />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 593)      </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 594)    </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 595)   );
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 602)     const [folder, onChangeText2] = useState(' ');
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 603)     const [mp3, onChangeText3] = useState(' ');
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 647)
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 653)                 <Separator />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 658)             <TextInput
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 659)                 style={styles.input}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 660)                 onChangeText={onChangeText2}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 661)                 value={folder}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 662)             />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 667)             <TextInput
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 668)                 style={styles.input}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 669)                 onChangeText={onChangeText3}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 670)                 value={mp3}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 671)             />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 681)
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 682)     <Separator />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 683)
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 684)      <View style={styles.libbtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 685)        <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 686)          title="Library"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 687)          color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 688)          onPress={() => navigation.navigate('Library Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 689)        />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 690)      </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 691)      <View style={styles.editbtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 692)         <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 693)           title="Editor"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 694)           color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 695)           onPress={() => navigation.navigate('Editor Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 696)         />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 697)       </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 698)       <View style={styles.explorebtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 699)         <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 700)           title="Explore"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 701)           color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 702)           onPress={() => navigation.navigate('Explore Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 703)         />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 704)       </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 705)      <View style={styles.setbtn}>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 706)      <Button
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 707)          title="Settings"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 708)          color="#aaaaaa"
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 709)          onPress={() => navigation.navigate('Settings Page')}
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 710)        />
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 711)      </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 712)    </View>
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 713)
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 714)   );
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 719)   paragraph: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 720)     margin: 24,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 721)     fontSize: 14,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 722)     textAlign: 'center',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 723)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 724)   logo: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 725)     paddingTop: 200,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 726)     height: 400,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 727)     fontWeight: 'bold',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 728)     fontSize: 40,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 729)     textAlign: 'center',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 730)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 731)   screensize:{
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 732)     height: 755,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 733)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 734)   input: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 735)     borderWidth: 1,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 736)     padding: 10,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 737)     margin: 12,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 738)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 739)   playbtn: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 740)     width: 50,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 741)     height: 50,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 742)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 743)   separator: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 744)     marginVertical: 8,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 745)     borderBottomColor: '#737373',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 746)     borderBottomWidth: StyleSheet.hairlineWidth,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 747)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 748)   libbtn: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 749)     right: 300,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 750)     left: 0,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 751)     width: "26%",
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 752)     position: 'absolute',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 753)     bottom: 0,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 754)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 755)   editbtn: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 756)     right: 200,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 757)     left: 105,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 758)     width: "26%",
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 759)     position: 'absolute',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 760)     bottom: 0,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 761)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 762)   explorebtn: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 763)     right: 100,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 764)     left: 206,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 765)     width: "26%",
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 766)     position: 'absolute',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 767)     bottom: 0,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 768)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 769)   setbtn: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 770)     right: 0,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 771)     left: 307,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 772)     width: "26%",
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 773)     position: 'absolute',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 774)     bottom: 0,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 775)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 776)   title: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 777)     opacity: 0,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 778)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 779)   trackplayer: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 780)     flex: 1,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 781)     alignItems: "center",
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 782)     flexDirection: 'row',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 783)     flexWrap: 'wrap',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 784)     borderTopWidth: 1,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 785)     borderBottomWidth: 1,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 786)     borderColor: '#737373',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 787)     width: '100%',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 788)     fontSize: 24,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 789)     position: "absolute",
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 790)     bottom: 37
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 791)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 792)   container: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 793)     flex: 1,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 794)     alignItems: "center",
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 795)     justifyContent: "center",
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 796)     flexDirection: 'row',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 797)     flexWrap: 'wrap',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 798)     paddingTop: 20,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 799)     paddingBottom: 20,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 800)   },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 801)   audioTitle: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 802)     left: 90,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 803)     paddingTop: 40,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 804)     marginRight: 40,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 805)     color: 'blue',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 806)     fontSize: 30,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 807)     fontWeight: 'bold',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 808) },
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 809)   shareButton: {
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 810)       left: 330,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 811)       top: -20,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 812)       alignContent: 'center',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 813)       alignItems: 'center',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 814)       fontSize: 10,
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 815)       fontWeight: 'bold',
+07f1210b (Skye Nidiffer 2023-12-06 10:05:46 -0500 816)   }
+(END)
+
+---- DownloadedMusicPlayer\SkeletonCode\scrapetojson.cpp ----
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500  1) #include <fstream>
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500  2) #include <iostream>
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500  3) #include <string>
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500  4) using namespace std;
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500  5)
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500  6) int main() {
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500  7)   string line;
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500  8)   int position = 1;
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500  9)   ifstream myfile("songs.txt");
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 10)   cout << "[ \n";
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 11)   while (getline(myfile, line)) {
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 12)     cout << "{\n \"position\": \"" << position << "\", \n";
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 13)     cout << "\"name\": \"" << line << "\", \n";
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 14)     getline(myfile, line);
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 15)     cout << "\"artist\": \"" << line << "\" \n";
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 16)     if (position == 100) {
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 17)       cout << "}\n";
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 18)     } else {
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 19)       cout << "},\n";
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 20)     }
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 21)     position++;
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 22)   }
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 23)   cout << "] \n";
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 24)   myfile.close();
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 25)
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 26)   // file format:
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 27)   // position
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 28)   // name
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 29)   // artist
+50cd386c (Skye Nidiffer 2023-12-06 06:54:14 -0500 30) }
+(END)

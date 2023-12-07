@@ -8,7 +8,7 @@ import { clear } from '@testing-library/user-event/dist/clear';
 export default function Library() {
 	var filter_open = false;
 	var playlist_open = false;
-	var change_open = false;
+	var rename_open = false;
 	var playlist_filter = false;
 	var current_playlist = -1;
 	var persistent_list = {};
@@ -295,34 +295,35 @@ export default function Library() {
 	}
 
 	function filter_clicked(){
-		const filter = document.getElementById("filter");
-		if(filter_open){
-			clear_filter();
-			filter_open = false;
-		}else{
-			clear_filter();
-			filter_open = true;
-			playlist_open = false;
-			change_open = false;
-			const artist = document.createElement("button");
-			const artist_text = document.createElement("p");
-			const artist_node = document.createTextNode("Artists");
-			artist_text.setAttribute("class", "filter_text");
-			artist.setAttribute("class", "filter_option");
-			artist.addEventListener("click", () => fill_filter("Artist"));
-			artist_text.appendChild(artist_node);
-			artist.appendChild(artist_text);
-			filter.appendChild(artist);
+		if(rename_open == false){
+			const filter = document.getElementById("filter");
+			if(filter_open){
+				clear_filter();
+				filter_open = false;
+			}else{
+				clear_filter();
+				filter_open = true;
+				playlist_open = false;
+				const artist = document.createElement("button");
+				const artist_text = document.createElement("p");
+				const artist_node = document.createTextNode("Artists");
+				artist_text.setAttribute("class", "filter_text");
+				artist.setAttribute("class", "filter_option");
+				artist.addEventListener("click", () => fill_filter("Artist"));
+				artist_text.appendChild(artist_node);
+				artist.appendChild(artist_text);
+				filter.appendChild(artist);
 
-			const album = document.createElement("button");
-			const album_text = document.createElement("p");
-			const album_node = document.createTextNode("Albums");
-			album_text.setAttribute("class", "filter_text");
-			album.setAttribute("class", "filter_option");
-			album.addEventListener("click", () => fill_filter("Album"));
-			album_text.appendChild(album_node);
-			album.appendChild(album_text);
-			filter.appendChild(album);
+				const album = document.createElement("button");
+				const album_text = document.createElement("p");
+				const album_node = document.createTextNode("Albums");
+				album_text.setAttribute("class", "filter_text");
+				album.setAttribute("class", "filter_option");
+				album.addEventListener("click", () => fill_filter("Album"));
+				album_text.appendChild(album_node);
+				album.appendChild(album_text);
+				filter.appendChild(album);
+			}
 		}
 	}
 
@@ -367,7 +368,10 @@ export default function Library() {
 			button_text.setAttribute("class", "filter_text");
 			button.setAttribute("class", "filter_option");
 			if(intent == "add"){
+				console.log("aaa");
 				button.addEventListener("click", () => add_song(i, path));
+			}else if(intent == "rename"){
+				button.addEventListener("click", () => prompt_rename(i));
 			}else{
 				button.addEventListener("click", () => display_playlist(i));
 			}
@@ -388,6 +392,43 @@ export default function Library() {
 		}
 	}
 
+	function prompt_rename(playlist_index){
+		rename_open = true;
+		playlist_open = false;
+		clear_filter();
+
+		var playlist = playlists[playlist_index];
+		console.log(playlist.Name);
+
+		const rename_div = document.createElement("div");
+		rename_div.setAttribute("class", "rename");
+		rename_div.setAttribute("id", "rename");
+		document.body.appendChild(rename_div);
+
+		const text_box = document.createElement("input");
+		text_box.setAttribute("type", "text");
+		text_box.setAttribute("class", "rename_input");
+		text_box.setAttribute("value", playlist.Name);
+		rename_div.appendChild(text_box);
+
+		const rename_button = document.createElement("button");
+		const rename_text = document.createElement("p");
+		const rename_node = document.createTextNode("Save");
+		rename_text.setAttribute("class", "save_text");
+		rename_text.appendChild(rename_node);
+		rename_button.appendChild(rename_text);
+
+		rename_button.setAttribute("class", "save_button");
+		rename_button.addEventListener("click", () => {
+			rename_div.removeChild(rename_button);
+			rename_div.removeChild(text_box);
+			document.body.removeChild(rename_div);
+			playlists[playlist_index].Name = text_box.value;
+			rename_open = false;
+		});
+		rename_div.appendChild(rename_button)
+	}
+
 	function undo_playlist(){
 		document.getElementById("playlist_text").textContent = "Playlists";
 		playlist_filter = false;
@@ -396,38 +437,49 @@ export default function Library() {
 
 	function playlist_clicked(){
 		const filter = document.getElementById("filter");
-		if(playlist_filter){
-			undo_playlist();
-			apply_changes("sort", current_sort);
-			clear_songs();
-			display_songs();
-		}else if(playlist_open){
-			clear_filter();
-			playlist_open = false;
-		}else{
-			clear_filter();
-			playlist_open = true;
-			filter_open = false;
-			change_open = false;
-			const playlist = document.createElement("button");
-			const playlist_text = document.createElement("p");
-			const playlist_node = document.createTextNode("Add New Playlist");
-			playlist_text.setAttribute("class", "filter_text");
-			playlist.setAttribute("class", "filter_option");
-			playlist.addEventListener("click", () => new_playlist());
-			playlist_text.appendChild(playlist_node);
-			playlist.appendChild(playlist_text);
-			filter.appendChild(playlist);
+		if(rename_open == false){
+			if(playlist_filter){
+				undo_playlist();
+				apply_changes("sort", current_sort);
+				clear_songs();
+				display_songs();
+			}else if(playlist_open){
+				clear_filter();
+				playlist_open = false;
+			}else{
+				clear_filter();
+				playlist_open = true;
+				filter_open = false;
+				const playlist = document.createElement("button");
+				const playlist_text = document.createElement("p");
+				const playlist_node = document.createTextNode("Add New Playlist");
+				playlist_text.setAttribute("class", "filter_text");
+				playlist.setAttribute("class", "filter_option");
+				playlist.addEventListener("click", () => new_playlist());
+				playlist_text.appendChild(playlist_node);
+				playlist.appendChild(playlist_text);
+				filter.appendChild(playlist);
 
-			const view = document.createElement("button");
-			const view_text = document.createElement("p");
-			const view_node = document.createTextNode("View Playlists");
-			view_text.setAttribute("class", "filter_text");
-			view.setAttribute("class", "filter_option");
-			view.addEventListener("click", () => fill_playlist());
-			view_text.appendChild(view_node);
-			view.appendChild(view_text);
-			filter.appendChild(view);
+				const view = document.createElement("button");
+				const view_text = document.createElement("p");
+				const view_node = document.createTextNode("View Playlists");
+				view_text.setAttribute("class", "filter_text");
+				view.setAttribute("class", "filter_option");
+				view.addEventListener("click", () => fill_playlist());
+				view_text.appendChild(view_node);
+				view.appendChild(view_text);
+				filter.appendChild(view);
+
+				const rename = document.createElement("button");
+				const rename_text = document.createElement("p");
+				const rename_node = document.createTextNode("Rename Playlist");
+				rename_text.setAttribute("class", "filter_text");
+				rename.setAttribute("class", "filter_option");
+				rename.addEventListener("click", () => fill_playlist("rename"));
+				rename_text.appendChild(rename_node);
+				rename.appendChild(rename_text);
+				filter.appendChild(rename);
+			}
 		}
 	}
 
