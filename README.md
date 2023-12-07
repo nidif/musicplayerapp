@@ -35,4 +35,4 @@
 - The Editor page allows you to trim and adjust tracks. The Explore page shows you currently trending songs and artists. The Settings page allows you to set a username, set folders to look for tracks in, and to import and export your preferences.
 
 ### License:
-License [here](https://github.com/utk-cs340-fall23/DownloadedMusicPlayer/blob/main/LICENSE.txt).
+License [here](https://github.com/nidif/musicplayerapp/blob/main/DownloadedMusicPlayer/LICENSE.txt).
