@@ -1,39 +1,13 @@
 
 # Downloaded Music Player
-![DMP Logo](https://lh3.googleusercontent.com/u/0/drive-viewer/AK7aPaAveWEBhN3aNDC0jrQOiSDXOv0txni6dStR15QpNA6ru-wOnTcfaTO061Kzu5CkTmZDe5T0Kif4HWM3C1nnaeCmOXNS=w600-h933)
-### Group Members & GitHub IDs:
-- Collins Pearson - collinspearson
-- Peyton Moore - caderbug
-- Skye Nidiffer - nidif
-- William Quesinberry - williamques
 
-### Project Description:
-- A phone app that is able to play music that is locally downloaded to a phone. It will contain features commonly seen in a typical music player. The common features that it includes is a music player, library function, audio editor, and an explore page.
-
-### Installation & Start up: 
-1. Install the latest version of Node.js:
-    * [https://nodejs.org/en/download](https://nodejs.org/en/download)
-    * Comes with npm/npx.
-2. Need to have/create an expo account along with having the latest version of Expo Go installed ([Expo Go Docs](https://docs.expo.dev/get-started/expo-go/)). Use commands:
-	* npm expo login
-    * npm install
-3. Create React Native development environment for app to run ([React Native Docs](https://reactnative.dev/docs/environment-setup)), use command: 
-	* npx create-expo-app DownloadedMusicPlayer
-4. Clone the repo, move SkeletonCode folders and files into the new DownloadedMusicPlayer expo app environment folder.
-5. In same folder, run following commands to download module dependencies:
-	*   npm install @react-navigation/native @react-navigation/native-stack
-	* npx expo install expo-av
-	* npx expo install expo-file-system
-	* npm install react-native-trimmer 
-6. To start the server, run:
-     * npx expo start
-7. Once run, you scan the QR code with Expo Go to open the app.
-
-### How to Use:
-- Once opened, you press the "Start Listening" button on the title screen.
-- This brings you to the Library screen, where you can listen to tracks and make playlists.
-- At the bottom of the screen are tabs for the Editor, Explore, and Settings pages.
-- The Editor page allows you to trim and adjust tracks. The Explore page shows you currently trending songs and artists. The Settings page allows you to set a username, set folders to look for tracks in, and to import and export your preferences.
-
-### License:
-License [here](https://github.com/utk-cs340-fall23/DownloadedMusicPlayer/blob/main/LICENSE.txt).
+### Folders & Files:
+- Project/
+	* Contains separate files for the editor and library pages and functions.
+- SkeletonCode/
+	* Contains all-together code, files, and assets for the main app. Called SkeletonCode because it began with the framework for where all the pages and functions would be accessible in one app.
+- helloplus/
+	* The team's starting place, testing and getting familiarized with the frameworks and languages.
+- sprint1/, sprint2/, sprint3/, sprint4/
+	* Each of the sprints our team did throughout the development process, with commits and reflections.
+- License.txt, ProjectPresentation.pptx, and projectplan.md files are as titled.
