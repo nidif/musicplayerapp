@@ -1,5 +1,6 @@
 # Downloaded Music Player
 ![DMP Logo](https://lh3.googleusercontent.com/u/0/drive-viewer/AK7aPaAveWEBhN3aNDC0jrQOiSDXOv0txni6dStR15QpNA6ru-wOnTcfaTO061Kzu5CkTmZDe5T0Kif4HWM3C1nnaeCmOXNS=w600-h933)
+(last updated Dec 7 - project in development)
 ### Group Members & GitHub IDs:
 - Collins Pearson - collinspearson
 - Peyton Moore - caderbug
