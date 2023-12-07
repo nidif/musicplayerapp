@@ -1,5 +1,4 @@
 # Downloaded Music Player
-(last updated Dec 7 - project in development)
 ![DMP Logo](https://lh3.googleusercontent.com/u/0/drive-viewer/AK7aPaAveWEBhN3aNDC0jrQOiSDXOv0txni6dStR15QpNA6ru-wOnTcfaTO061Kzu5CkTmZDe5T0Kif4HWM3C1nnaeCmOXNS=w600-h933)
 ### Group Members & GitHub IDs:
 - Collins Pearson - collinspearson
@@ -9,6 +8,7 @@
 
 ### Project Description:
 - A React Native/Expo Go mobile app that is able to play music files locally downloaded to a phone. Contains features commonly seen in a typical music player, such as making playlists, editing tracks, and exploring trending music. Primarily developed for Android phones.
+- (last updated Dec 7 - project in development)
 
 ### Installation & Start up: 
 1. Install the latest version of Node.js:
